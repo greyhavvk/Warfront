@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grid_System
 {
@@ -18,12 +18,15 @@ namespace Grid_System
         public int Width=>_width;
         public int High=>_high;
 
-        public GridPart _cameFrom;
-        
-        public void Initialize(int width, int high)
+        [HideInInspector] public GridPart cameFrom;
+
+        private Action _gridEmptiesChanged;
+
+        public void Initialize(int width, int high, Action gridEmptiesChanged)
         {
             _width = width;
             _high = high;
+            _gridEmptiesChanged = gridEmptiesChanged;
         }
         
         public bool Empty
@@ -31,6 +34,10 @@ namespace Grid_System
             get => _empty;
             set
             {
+                if (_empty!=value)
+                {
+                    _gridEmptiesChanged?.Invoke();
+                }
                 _empty = value;
                 UpdateVisual();
             }

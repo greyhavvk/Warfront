@@ -10,8 +10,7 @@ namespace Grid_System
         private Transform _parent;
         private Dictionary<Vector3,GridPart> _gridLocalPositionDictionary;
 
-        private static GridController _instance;
-        public static GridController Instance => _instance;
+        public static GridController Instance { get; private set; }
 
         public int SizeX { get; private set; }
 
@@ -19,13 +18,13 @@ namespace Grid_System
 
         private void Awake()
         {
-            if (_instance!=null && _instance!=this)
+            if (Instance!=null && Instance!=this)
             {
                 Destroy(gameObject);
             }
             else
             {
-                _instance = this;
+                Instance = this;
             }
         }
 
@@ -34,7 +33,7 @@ namespace Grid_System
             CreateGrid(20, 10);
         }
 
-        public void CreateGrid(int width, int height)
+        private void CreateGrid(int width, int height)
         {
             SizeX = width;
             SizeY = height;
@@ -47,8 +46,13 @@ namespace Grid_System
             foreach (var gridPart in _gridLocalPositionDictionary)
             {
                 gridPart.Value.transform.localPosition = gridPart.Key;
-                gridPart.Value.Initialize((int)gridPart.Key.x, (int)gridPart.Key.y);
+                gridPart.Value.Initialize((int)gridPart.Key.x, (int)gridPart.Key.y,GridEmptiesChange);
             }
+        }
+
+        private void GridEmptiesChange()
+        {
+            //TODO unit'ler bunu dinleyecek.
         }
 
         public GridPart GetGridPart(Vector3 worldPosition)
@@ -65,26 +69,6 @@ namespace Grid_System
                 return _gridLocalPositionDictionary[new Vector2(x, y)];
             }
             return null;
-        }
-        
-        private void SetEmpty(Vector3 worldPosition, bool value)
-        {
-            var gridPart=GetGridPart(worldPosition);
-            if (gridPart)
-            {
-                gridPart.Empty = value;
-            }
-        }
-
-        private bool GetEmpty(Vector3 worldPosition)
-        {
-            var value=false;
-            var gridPart=GetGridPart(worldPosition);
-            if (gridPart)
-            {
-                value=gridPart.Empty;
-            }
-            return value;
         }
     }
 }

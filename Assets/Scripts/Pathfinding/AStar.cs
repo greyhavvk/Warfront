@@ -43,7 +43,7 @@ namespace Pathfinding
                     {
                         neighbor.gCost = newCostToNeighbor;
                         neighbor.hCost = GetDistance(neighbor, targetGridPart);
-                        neighbor._cameFrom = currentGridPart;
+                        neighbor.cameFrom = currentGridPart;
 
                         if (!openSet.Contains(neighbor))
                         {
@@ -99,7 +99,7 @@ namespace Pathfinding
             while (currentGridPart != startGridPart)
             {
                 path.Add(currentGridPart);
-                currentGridPart = currentGridPart._cameFrom;
+                currentGridPart = currentGridPart.cameFrom;
             }
 
             path.Reverse();

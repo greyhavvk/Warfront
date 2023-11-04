@@ -5,40 +5,39 @@ namespace Unit_Selection
 {
     public class UnitSelection : MonoBehaviour
     {
-        private static UnitSelection _instance;
-        public static UnitSelection Instance => _instance;
-        
+        public static UnitSelection Instance { get; private set; }
+
         private List<GameObject> _selectedUnitList;
-        private List<Transform> _unitTransformList;
         private Dictionary<GameObject, IUnitSelecting> _unitDictionary;
 
-        public List<Transform> UnitTransformList => _unitTransformList;
+        public List<Transform> UnitTransformList { get; private set; }
+
         private void Awake()
         {
-            if (_instance!=null && _instance!=this)
+            if (Instance!=null && Instance!=this)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
             else
             {
-                _instance = this;
+                Instance = this;
             }
 
             _unitDictionary = new Dictionary<GameObject, IUnitSelecting>();
             _selectedUnitList = new List<GameObject>();
-            _unitTransformList = new List<Transform>();
+            UnitTransformList = new List<Transform>();
         }
 
         public void AddObjectToUnitList(GameObject unit, IUnitSelecting unitSelecting)
         {
             _unitDictionary.Add(unit, unitSelecting);
-            _unitTransformList.Add(unit.transform);
+            UnitTransformList.Add(unit.transform);
         }
         
         public void RemoveObjectToUnitList(GameObject unit)
         {
             _unitDictionary.Remove(unit);
-            _unitTransformList.Remove(unit.transform);
+            UnitTransformList.Remove(unit.transform);
         }
 
         public void ClickSelect(GameObject unitToAdd)
@@ -57,8 +56,7 @@ namespace Unit_Selection
             }
             else
             {
-                _selectedUnitList.Remove(unitToAdd);
-                _unitDictionary[unitToAdd].UnitUnselected();
+                Deselect(unitToAdd);
             }
         }
         
@@ -80,9 +78,10 @@ namespace Unit_Selection
             _selectedUnitList.Clear();
         }
 
-        public void Deselect(GameObject unitToDeselect)
+        private void Deselect(GameObject unitToDeselect)
         {
-            
+            _selectedUnitList.Remove(unitToDeselect);
+            _unitDictionary[unitToDeselect].UnitUnselected();
         }
     }
 }

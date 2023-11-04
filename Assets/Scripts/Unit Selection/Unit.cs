@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Unit_Selection
 {
@@ -28,13 +27,13 @@ namespace Unit_Selection
         public void UnitSelected()
         {
             selectPointer.SetActive(true);
-            unitMovement.enabled = true;
+            unitMovement.active = true;
         }
 
         public void UnitUnselected()
         {
             selectPointer.SetActive(false);
-            unitMovement.enabled = false;
+            unitMovement.active = false;
         }
     }
 }

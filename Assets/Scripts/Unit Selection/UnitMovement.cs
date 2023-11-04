@@ -1,37 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using Grid_System;
+using InputSystem;
 using Pathfinding;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Unit_Selection
 {
     public class UnitMovement : MonoBehaviour
     {
-        private Camera _camera;
         [SerializeField] private float moveTimePerGrid;
         [SerializeField] private LayerMask ground;
-        
+
+        public bool active;
         
         private void Start()
         {
-            _camera = Camera.main;
+            InputManager.Instance.OnMouseRightClickDown += TriggerMove;
         }
 
-        private void Update()
+        private void TriggerMove()
         {
-            if (Input.GetMouseButtonDown(1))
+            if (!active)
+                return;
+            RaycastHit2D hit = Physics2D.Raycast(InputManager.Instance.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, ground);
+            if (hit)
             {
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-
-                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, ground);
-                if (hit)
-                {
-                    Move(AStar.FindPath(GridController.Instance.GetGridPart(transform.position), GridController.Instance.GetGridPart(hit.point)));
-                }
+                Move(AStar.FindPath(GridController.Instance.GetGridPart(transform.position),
+                    GridController.Instance.GetGridPart(hit.point)));
             }
         }
 

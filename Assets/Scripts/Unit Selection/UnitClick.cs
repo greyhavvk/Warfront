@@ -1,59 +1,43 @@
-﻿using UnityEngine;
+﻿using InputSystem;
+using UnityEngine;
 
 namespace Unit_Selection
 {
     public class UnitClick : MonoBehaviour
     {
-        private Camera _camera;
-
-        [SerializeField] private GameObject groundMarker;
         [SerializeField] private LayerMask clickable;
-        [SerializeField] private LayerMask ground;
+
         private void Start()
         {
-            _camera = Camera.main;
+            InputManager.Instance.OnMouseLeftClickDown+=Click;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+            InputManager.Instance.OnMouseLeftClickDown-=Click;
+        }
 
-                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, clickable);
-                if (hit)
+        private void Click()
+        {
+            if (InputManager.Instance.inputType != InputType.Nothing)
+                return;
+            var hit = Physics2D.Raycast( InputManager.Instance.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, clickable);
+            if (hit)
+            {
+                if ( InputManager.Instance.GetKey(KeyCode.LeftShift))
                 {
-                    if (Input.GetKey(KeyCode.LeftShift))
-                    {
-                        UnitSelection.Instance.ShiftClickSelect(hit.collider.gameObject);
-                    }
-                    else
-                    {
-                        UnitSelection.Instance.ClickSelect(hit.collider.gameObject);
-                    }
+                    UnitSelection.Instance.ShiftClickSelect(hit.collider.gameObject);
                 }
                 else
                 {
-                    if (!Input.GetKey(KeyCode.LeftShift))
-                    {
-                        UnitSelection.Instance.DeselectAll();
-                    }
-                   
+                    UnitSelection.Instance.ClickSelect(hit.collider.gameObject);
                 }
             }
-
-            if (Input.GetMouseButtonDown(1))
+            else
             {
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-
-                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, ground);
-                if (hit)
+                if (! InputManager.Instance.GetKey(KeyCode.LeftShift))
                 {
-                    groundMarker.transform.position = hit.point;
-                    groundMarker.SetActive(false);
-                    groundMarker.SetActive(true);
+                    UnitSelection.Instance.DeselectAll();
                 }
             }
         }

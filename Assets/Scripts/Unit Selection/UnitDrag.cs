@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using InputSystem;
 using UnityEngine;
 
 namespace Unit_Selection
@@ -16,30 +17,47 @@ namespace Unit_Selection
         {
             _camera=Camera.main;
             DrawVisual();
+            InputManager.Instance.OnMouseLeftClickDown+=StartDrag;
+            InputManager.Instance.OnMouseLeftClick+=Drag;
+            InputManager.Instance.OnMouseLeftClickUp+=EndDrag;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _startPosition = Input.mousePosition;
-                _selectionBox = new Rect();
-            }
-            
-            if (Input.GetMouseButton(0))
-            {
-                _endPosition = Input.mousePosition;
-                DrawVisual();
-                DrawSelection();
-            }
-            
-            if (Input.GetMouseButtonUp(0))
-            {
+            InputManager.Instance.OnMouseLeftClickDown-=StartDrag;
+            InputManager.Instance.OnMouseLeftClick-=Drag;
+            InputManager.Instance.OnMouseLeftClickUp-=EndDrag;
+        }
+
+        private void EndDrag()
+        {
+            if (InputManager.Instance.inputType == InputType.Nothing)
                 SelectUnits();
-                _startPosition=Vector2.zero;
-                _endPosition=Vector2.zero;
+            _startPosition = Vector2.zero;
+            _endPosition = Vector2.zero;
+            DrawVisual();
+        }
+
+        private void Drag()
+        {
+            if (InputManager.Instance.inputType != InputType.Nothing)
+            {
+                _startPosition = Vector2.zero;
+                _endPosition = Vector2.zero;
                 DrawVisual();
+                return;
             }
+            _endPosition = Input.mousePosition;
+            DrawVisual();
+            DrawSelection();
+        }
+
+        private void StartDrag()
+        {
+            if (InputManager.Instance.inputType != InputType.Nothing)
+                return;
+            _startPosition = Input.mousePosition;
+            _selectionBox = new Rect();
         }
 
         private void DrawVisual()
@@ -57,26 +75,26 @@ namespace Unit_Selection
 
         private void DrawSelection()
         {
-            if (Input.mousePosition.x < _startPosition.x)
+            if (InputManager.Instance.MousePos.x < _startPosition.x)
             {
-                _selectionBox.xMin = Input.mousePosition.x;
+                _selectionBox.xMin = InputManager.Instance.MousePos.x;
                 _selectionBox.xMax = _startPosition.x;
             }
             else
             {
                 _selectionBox.xMin = _startPosition.x;
-                _selectionBox.xMax = Input.mousePosition.x;
+                _selectionBox.xMax = InputManager.Instance.MousePos.x;
             }
             
-            if (Input.mousePosition.y < _startPosition.y)
+            if (InputManager.Instance.MousePos.y < _startPosition.y)
             {
-                _selectionBox.yMin = Input.mousePosition.y;
+                _selectionBox.yMin = InputManager.Instance.MousePos.y;
                 _selectionBox.yMax = _startPosition.y;
             }
             else
             {
                 _selectionBox.yMin = _startPosition.y;
-                _selectionBox.yMax = Input.mousePosition.y;
+                _selectionBox.yMax = InputManager.Instance.MousePos.y;
             }
         }
 
