@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Unit_Selection
 {
@@ -12,7 +13,12 @@ namespace Unit_Selection
             UnitSelection.Instance.RemoveObjectToUnitList(gameObject);
             UnitUnselected();
         }
-        
+
+        private void Start()
+        {
+            UnitEnabled();
+        }
+
         public void UnitEnabled()
         {
             UnitSelection.Instance.AddObjectToUnitList(gameObject, this);

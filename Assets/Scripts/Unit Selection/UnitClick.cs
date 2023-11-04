@@ -18,9 +18,11 @@ namespace Unit_Selection
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-                if (Physics.Raycast(ray,out var hit, Mathf.Infinity,clickable))
+                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, clickable);
+                if (hit)
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
@@ -43,9 +45,11 @@ namespace Unit_Selection
 
             if (Input.GetMouseButtonDown(1))
             {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-                if (Physics.Raycast(ray,out var hit, Mathf.Infinity,ground))
+                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, ground);
+                if (hit)
                 {
                     groundMarker.transform.position = hit.point;
                     groundMarker.SetActive(false);
