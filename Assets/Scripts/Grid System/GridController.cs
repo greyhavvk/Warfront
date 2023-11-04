@@ -7,7 +7,6 @@ namespace Grid_System
     {
         [SerializeField] private GridPart refGridPart;
         private Grid<GridPart> _grid;
-        private Camera _camera;
         private Transform _parent;
         private Dictionary<Vector3,GridPart> _gridLocalPositionDictionary;
 
@@ -32,7 +31,6 @@ namespace Grid_System
 
         private void Start()
         {
-            _camera=Camera.main;
             CreateGrid(20, 10);
         }
 
