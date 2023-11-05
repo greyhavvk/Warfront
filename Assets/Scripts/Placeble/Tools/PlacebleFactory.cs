@@ -71,9 +71,13 @@ namespace Placeble.Tools
                     Debug.Log("The requested building type is not available!");
                     return;
             }
-            
-            placebleEntity.SetLevel(lvl);
-            PlaceblePlacement.Instance.SetUnplacedBuilding(placebleEntity);
+
+            if (placebleEntity != null)
+            {
+                placebleEntity.SetLevel(lvl);
+                PlaceblePlacement.Instance.SetUnplacedBuilding(placebleEntity);
+            }
+
             ClickManager.ClickType=ClickType.PlaceBuilding;
             UnitSelection.Instance.DeselectAll();
         }

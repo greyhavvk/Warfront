@@ -72,8 +72,16 @@ public class ClickManager : MonoBehaviour
 
     private void CancelButtonDown()
     {
-        OnCancel?.Invoke();
-        ClickType = ClickType.Nothing;
+        if (ClickType != ClickType.Nothing)
+        {
+            OnCancel?.Invoke();
+            ClickType = ClickType.Nothing;
+        }
+        else
+        {
+            Application.Quit();
+        }
+       
     }
 
     private void RotateButtonDown()
