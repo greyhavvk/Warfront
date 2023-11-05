@@ -22,6 +22,8 @@ namespace Grid_System
 
         private Action _gridEmptiesChanged;
 
+        public Transform unit;
+
         public void Initialize(int width, int high, Action gridEmptiesChanged)
         {
             _width = width;
@@ -39,6 +41,10 @@ namespace Grid_System
                     _gridEmptiesChanged?.Invoke();
                 }
                 _empty = value;
+                if (_empty)
+                {
+                    unit = null;
+                }
                 UpdateVisual();
             }
         }

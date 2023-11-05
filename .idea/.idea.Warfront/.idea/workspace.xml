@@ -2,11 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1921e082-33bd-49e0-ba6a-b0d3a60c959e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/PlacebleInitializeData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/UnitEntity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/PlacebleExtra/UnitMovement.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlacebleFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Barrack.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Barrack.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PowerPlant.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PowerPlant.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BarrackEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/BarrackEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BarrackEntity.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/BarrackEntity.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/PlacebleEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingEntity.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/PlacebleEntity.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingFactory.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingFactory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlacebleFactory.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingPlacement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlaceblePlacement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingPlacement.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlaceblePlacement.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/PlacebleType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/BuildingType.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/PlacebleType.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/PowerPlantEntity.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building/PowerPlantEntity.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid System/GridController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GridManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid System/GridController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GridManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid System/GridPart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid System/GridPart.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HitPointSystem.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/PlacebleExtra.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HitPointSystem/HitPointObserver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/PlacebleExtra/HealthPointObserver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HitPointSystem/HitPointObserver.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/PlacebleExtra/HealthPointObserver.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputSystem/ClickType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputSystem/InputType.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputSystem/ClickType.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/BuildingInitializeData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/BuildingInitializeData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/PlacebleInitializeData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/AStar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/AStar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/IUnitActive.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/IUnitActive.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/Unit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/Unit.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/UnitEntity.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitClick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitClick.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitDrag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitMovement.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitMovement.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/PlacebleExtra/UnitMovement.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/pixil-frame-0 (1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/pixil-frame-0 (1).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/pixil-frame-0 (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/pixil-frame-0 (2).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +60,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid System/Grid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/InfiniteScrolling/ScrollContentController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/ScrollRect.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/894891e4dbf643f8975c5997fc5f4d383d400/ff/7e2709bb/IBeginDragHandler.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -95,6 +144,7 @@
       <workItem from="1698925437017" duration="15227000" />
       <workItem from="1699082344003" duration="2221000" />
       <workItem from="1699109553107" duration="15022000" />
+      <workItem from="1699160982572" duration="43395000" />
     </task>
     <servers />
   </component>

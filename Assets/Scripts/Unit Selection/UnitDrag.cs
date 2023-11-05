@@ -8,39 +8,42 @@ namespace Unit_Selection
     {
         private Camera _camera;
         [SerializeField] private RectTransform boxVisual;
-
         private Rect _selectionBox;
         private Vector2 _startPosition=Vector2.zero;
         private Vector2 _endPosition=Vector2.zero;
 
+        private bool _dragging;
+        
         private void Start()
         {
             _camera=Camera.main;
             DrawVisual();
-            InputManager.Instance.OnMouseLeftClickDown+=StartDrag;
-            InputManager.Instance.OnMouseLeftClick+=Drag;
-            InputManager.Instance.OnMouseLeftClickUp+=EndDrag;
+            ClickManager.Instance.OnStartDrag+=StartDrag;
+            ClickManager.Instance.OnDrag+=Drag;
+            ClickManager.Instance.OnEndDrag+=EndDrag;
         }
 
         private void OnDestroy()
         {
-            InputManager.Instance.OnMouseLeftClickDown-=StartDrag;
-            InputManager.Instance.OnMouseLeftClick-=Drag;
-            InputManager.Instance.OnMouseLeftClickUp-=EndDrag;
+            ClickManager.Instance.OnStartDrag-=StartDrag;
+            ClickManager.Instance.OnDrag-=Drag;
+            ClickManager.Instance.OnEndDrag-=EndDrag;
         }
 
         private void EndDrag()
         {
-            if (InputManager.Instance.inputType == InputType.Nothing)
-                SelectUnits();
+            SelectUnits();
             _startPosition = Vector2.zero;
             _endPosition = Vector2.zero;
             DrawVisual();
+            _dragging = false;
         }
 
         private void Drag()
         {
-            if (InputManager.Instance.inputType != InputType.Nothing)
+            if (_dragging == false)
+                return;
+            if (ClickManager.ClickType != ClickType.Nothing)
             {
                 _startPosition = Vector2.zero;
                 _endPosition = Vector2.zero;
@@ -54,11 +57,13 @@ namespace Unit_Selection
 
         private void StartDrag()
         {
-            if (InputManager.Instance.inputType != InputType.Nothing)
+            if (ClickManager.ClickType != ClickType.Nothing)
                 return;
+            _dragging = true;
             _startPosition = Input.mousePosition;
             _selectionBox = new Rect();
         }
+        
 
         private void DrawVisual()
         {
@@ -75,26 +80,26 @@ namespace Unit_Selection
 
         private void DrawSelection()
         {
-            if (InputManager.Instance.MousePos.x < _startPosition.x)
+            if (InputManager.Mouse.MousePos.x < _startPosition.x)
             {
-                _selectionBox.xMin = InputManager.Instance.MousePos.x;
+                _selectionBox.xMin = InputManager.Mouse.MousePos.x;
                 _selectionBox.xMax = _startPosition.x;
             }
             else
             {
                 _selectionBox.xMin = _startPosition.x;
-                _selectionBox.xMax = InputManager.Instance.MousePos.x;
+                _selectionBox.xMax = InputManager.Mouse.MousePos.x;
             }
             
-            if (InputManager.Instance.MousePos.y < _startPosition.y)
+            if (InputManager.Mouse.MousePos.y < _startPosition.y)
             {
-                _selectionBox.yMin = InputManager.Instance.MousePos.y;
+                _selectionBox.yMin = InputManager.Mouse.MousePos.y;
                 _selectionBox.yMax = _startPosition.y;
             }
             else
             {
                 _selectionBox.yMin = _startPosition.y;
-                _selectionBox.yMax = InputManager.Instance.MousePos.y;
+                _selectionBox.yMax = InputManager.Mouse.MousePos.y;
             }
         }
 
