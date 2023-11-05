@@ -45,8 +45,7 @@ namespace InputSystem
         {
             if (Input.GetMouseButtonDown(0))
             {
-              
-                    OnMouseLeftClickDown?.Invoke();
+                OnMouseLeftClickDown?.Invoke();
             }
             
             if (Input.GetMouseButton(0))

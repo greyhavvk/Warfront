@@ -56,6 +56,7 @@ namespace UI
             {
                 if ( hit.collider.gameObject.CompareTag("building"))
                 {
+                    ClickManager.ClickType = ClickType.UIPanel;
                     OpenInformationPanel(hit.collider.GetComponent<IPlacebleType>().PlacebleType);
                 }
 
