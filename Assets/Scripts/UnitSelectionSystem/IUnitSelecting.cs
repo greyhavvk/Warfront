@@ -1,4 +1,4 @@
-﻿namespace Unit_Selection
+﻿namespace UnitSelectionSystem
 {
     public interface IUnitSelecting
     {

@@ -2,7 +2,7 @@
 using InputSystem;
 using UnityEngine;
 
-namespace Unit_Selection
+namespace UnitSelectionSystem
 {
     public class UnitDrag : MonoBehaviour
     {

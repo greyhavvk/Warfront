@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unit_Selection
+namespace UnitSelectionSystem
 {
     public class UnitSelection : MonoBehaviour
     {
