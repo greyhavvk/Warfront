@@ -78,7 +78,7 @@ namespace Unit_Selection
             _selectedUnitList.Clear();
         }
 
-        private void Deselect(GameObject unitToDeselect)
+        public void Deselect(GameObject unitToDeselect)
         {
             _selectedUnitList.Remove(unitToDeselect);
             _unitDictionary[unitToDeselect].UnitUnselected();

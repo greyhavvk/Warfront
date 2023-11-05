@@ -60,6 +60,7 @@ namespace Placeble.Entity
         {
             UnitSelection.Instance.RemoveObjectToUnitList(gameObject);
             UnitUnselected();
+            UnitSelection.Instance.Deselect(gameObject);
         }
 
         private void UnitEnabled()
