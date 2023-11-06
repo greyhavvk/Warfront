@@ -3,7 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="1921e082-33bd-49e0-ba6a-b0d3a60c959e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/ClickManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/ClickManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GridManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlacebleFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlacebleFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlaceblePlacement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlaceblePlacement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitSelection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitSelection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/Managed/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/Managed/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/Plugins/x86_64/lib_burst_generated.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/Plugins/x86_64/lib_burst_generated.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

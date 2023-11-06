@@ -21,20 +21,12 @@ namespace Managers
         private Vector3 _spawnPoint;
         private void Awake()
         {
-            if (SetActiveProduction!=null && SetActiveProduction!=this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                SetActiveProduction = this;
-            }
-            
-            CloseAllPanel();
+            SetActiveProduction = this;
         }
 
         private void Start()
         {
+            CloseAllPanel();
             ClickManager.ClickEvent.OnOpenProductionMenu += OpenProductionMenu;
             ClickManager.ClickEvent.OnCancel += CloseAllPanel;
             ClickManager.ClickEvent.OnPlacebleClick += PlacebleClick;

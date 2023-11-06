@@ -14,14 +14,7 @@ namespace UnitSelectionSystem
 
         private void Awake()
         {
-            if (Instance!=null && Instance!=this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-            }
+            Instance = this;
 
             _unitDictionary = new Dictionary<GameObject, IUnitSelecting>();
             _selectedUnitList = new List<GameObject>();

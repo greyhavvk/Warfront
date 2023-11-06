@@ -24,16 +24,9 @@ namespace InputSystem
 
         private void Awake()
         {
-            if (InputEvent!=null && InputEvent!=this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                InputEvent = this;
-                Mouse = this;
-                Key = this;
-            }
+            InputEvent = this;
+            Mouse = this;
+            Key = this;
         }
 
         private void Start()

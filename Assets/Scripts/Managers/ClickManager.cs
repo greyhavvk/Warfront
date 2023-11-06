@@ -31,15 +31,8 @@ namespace Managers
 
         private void Awake()
         {
-            if (ClickEvent!=null && ClickEvent!=this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                ClickEvent = this;
-                Type = this;
-            }
+            ClickEvent = this;
+            Type = this;
         }
 
         private void Start()

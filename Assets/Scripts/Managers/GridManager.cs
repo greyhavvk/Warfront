@@ -1,3 +1,4 @@
+using System;
 using Grid_System;
 using UnityEngine;
 
@@ -19,16 +20,13 @@ namespace Managers
 
         private void Awake()
         {
-            if (GetPart!=null && GetPart!=this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                GetGridSize = this;
-                GetPart = this;
-            }
-            
+            GetGridSize = this;
+            GetPart = this;
+               
+        }
+
+        private void Start()
+        {
             CreateGrid();
         }
 
