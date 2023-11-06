@@ -4,7 +4,7 @@ using InputSystem;
 using Pathfinding;
 using UnityEngine;
 
-namespace Unit_Selection
+namespace Placeble.PlacebleExtra
 {
     public class UnitMovement : MonoBehaviour
     {
@@ -12,16 +12,15 @@ namespace Unit_Selection
         [SerializeField] private LayerMask canTakeDamage;
 
         private Transform _lastTarget;
-        private GridPart _lastMoveGrid;
+        private IGridPart _lastMoveGrid;
         private bool _onMoving;
 
-        private void Start()
+        public IGridPart LastMoveGrid
         {
-            _lastMoveGrid = GridManager.Instance.GetGridPart(transform.position);
-            transform.position = _lastMoveGrid.transform.position;
-            _lastMoveGrid.Empty = false;
+            set => _lastMoveGrid = value;
         }
-
+    
+        
         public void TriggerMove(RaycastHit2D hit)
         {
             StopCoroutine(Move());
@@ -31,11 +30,11 @@ namespace Unit_Selection
             var hitUnit = Physics2D.Raycast(InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, canTakeDamage);
             if (hitUnit)
             {
-                _lastTarget = hitUnit.collider.gameObject.CompareTag("unit") ? hitUnit.collider.transform : gridPart.transform;
+                _lastTarget = hitUnit.collider.gameObject.CompareTag("unit") ? hitUnit.collider.transform : gridPart.Transform;
             }
             else
             {
-                _lastTarget = gridPart.transform;
+                _lastTarget = gridPart.Transform;
             }
             StartCoroutine(Move());
         }
@@ -44,34 +43,31 @@ namespace Unit_Selection
         {
             var elapsedTime = 0f;
             var moveDuration = moveTimePerGrid;
-
             if (!_lastTarget.gameObject.activeSelf)
             {
                 yield break;
             }
-
-            var gridParts = AStar.FindPath(GridManager.Instance.GetGridPart(transform.position),
-                GridManager.Instance.GetGridPart(_lastTarget.position), transform);
+            var gridParts = AStar.FindPath(GridManager.Instance.GetGridPart(transform.position).Pathfinding,
+                GridManager.Instance.GetGridPart(_lastTarget.position).Pathfinding, transform);
             if (gridParts == null || gridParts.Count == 0)
                 yield break;
-
 
             Vector3 startPos = transform.position;
             var gridPart = _onMoving ? _lastMoveGrid : gridParts[0];
             _onMoving = true;
             var startGridPart = _lastMoveGrid;
             _lastMoveGrid = gridPart;
-            gridPart.unit = transform;
+            gridPart.Unit = transform;
             while (elapsedTime < moveDuration)
             {
-                transform.position = Vector3.Lerp(startPos, gridPart.transform.position, elapsedTime / moveDuration);
+                transform.position = Vector3.Lerp(startPos, gridPart.Transform.position, elapsedTime / moveDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
             gridPart.Empty = false;
             startGridPart.Empty = true;
-            gridPart.unit = null;
+            gridPart.Unit = null;
             _onMoving = false;
             if (_lastTarget.gameObject.activeSelf)
                 if (Vector3.Distance(transform.position, _lastTarget.position) > 1.41f)

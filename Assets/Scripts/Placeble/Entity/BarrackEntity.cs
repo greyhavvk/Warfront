@@ -1,7 +1,7 @@
 using Building;
 using UnityEngine;
 
-namespace Placeble
+namespace Placeble.Entity
 {
     public class BarrackEntity : DamagebleAndPlaceableEntity
     {

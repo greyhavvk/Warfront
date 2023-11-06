@@ -7,9 +7,9 @@ namespace Pathfinding
 {
     public static class AStar
     {
-        public static List<GridPart> FindPath(GridPart startGridPart, GridPart targetGridPart, Transform moveObject)
+        public static List<IGridPart> FindPath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject)
         {
-            if (targetGridPart.IsObstacle || (targetGridPart.unit!=null  &&  targetGridPart.unit!=moveObject))
+            if (targetGridPart.IsObstacle || (targetGridPart.Unit!=null  &&  targetGridPart.Unit!=moveObject))
             {
                 var newTarget = FindClosestWalkableGridPart(targetGridPart, startGridPart, moveObject);
                 targetGridPart = newTarget;
@@ -18,19 +18,19 @@ namespace Pathfinding
             return CalculatePath(startGridPart, targetGridPart, moveObject, out var gridParts) ? gridParts : null;
         }
 
-        private static bool CalculatePath(GridPart startGridPart, GridPart targetGridPart, Transform moveObject, out List<GridPart> gridParts)
+        private static bool CalculatePath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject, out List<IGridPart> gridParts)
         {
-            List<GridPart> openSet = new List<GridPart>();
-            HashSet<GridPart> closedSet = new HashSet<GridPart>();
+            List<IPathfinding> openSet = new List<IPathfinding>();
+            HashSet<IPathfinding> closedSet = new HashSet<IPathfinding>();
             openSet.Add(startGridPart);
 
             while (openSet.Count > 0)
             {
-                GridPart currentGridPart = openSet[0];
+                IPathfinding currentGridPart = openSet[0];
                 for (int i = 1; i < openSet.Count; i++)
                 {
                     if (openSet[i].FCost < currentGridPart.FCost || (openSet[i].FCost == currentGridPart.FCost &&
-                                                                     openSet[i].hCost < currentGridPart.hCost))
+                                                                     openSet[i].HCost < currentGridPart.HCost))
                     {
                         currentGridPart = openSet[i];
                     }
@@ -39,7 +39,7 @@ namespace Pathfinding
                 openSet.Remove(currentGridPart);
                 closedSet.Add(currentGridPart);
 
-                if (currentGridPart == targetGridPart && !(currentGridPart.IsObstacle || (currentGridPart.unit!=null  &&  currentGridPart.unit!=moveObject)))
+                if (currentGridPart == targetGridPart && !(currentGridPart.IsObstacle || (currentGridPart.Unit!=null  &&  currentGridPart.Unit!=moveObject)))
                 {
                     {
                         gridParts = RetracePath(startGridPart, targetGridPart);
@@ -49,17 +49,17 @@ namespace Pathfinding
 
                 foreach (var neighbor in GetNeighbors(currentGridPart, moveObject))
                 {
-                    if (closedSet.Contains(neighbor) || (neighbor.IsObstacle || (neighbor.unit!=null  &&  neighbor.unit!=moveObject)))
+                    if (closedSet.Contains(neighbor) || (neighbor.IsObstacle || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
                     {
                         continue;
                     }
 
-                    int newCostToNeighbor = currentGridPart.gCost + GetDistance(currentGridPart, neighbor);
-                    if (newCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
+                    int newCostToNeighbor = currentGridPart.GCost + GetDistance(currentGridPart, neighbor);
+                    if (newCostToNeighbor < neighbor.GCost || !openSet.Contains(neighbor))
                     {
-                        neighbor.gCost = newCostToNeighbor;
-                        neighbor.hCost = GetDistance(neighbor, targetGridPart);
-                        neighbor.cameFrom = currentGridPart;
+                        neighbor.GCost = newCostToNeighbor;
+                        neighbor.HCost = GetDistance(neighbor, targetGridPart);
+                        neighbor.CameFrom = currentGridPart;
 
                         if (!openSet.Contains(neighbor))
                         {
@@ -73,9 +73,9 @@ namespace Pathfinding
             return false;
         }
 
-        private static List<GridPart> GetNeighbors(GridPart gridPart, Transform moveObject)
+        private static List<IPathfinding> GetNeighbors(IPathfinding gridPart, Transform moveObject)
         {
-            List<GridPart> neighbors = new List<GridPart>();
+            List<IPathfinding> neighbors = new List<IPathfinding>();
             int gridSizeX = GridManager.Instance.SizeX;
             int gridSizeY = GridManager.Instance.SizeY;
 
@@ -89,8 +89,8 @@ namespace Pathfinding
 
                 if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
                 {
-                    GridPart neighbor = GridManager.Instance.GetGridPart(newX, newY);
-                    if (!(neighbor.IsObstacle || (neighbor.unit!=null  &&  neighbor.unit!=moveObject)))
+                    IPathfinding neighbor = GridManager.Instance.GetGridPart(newX, newY).Pathfinding;
+                    if (!(neighbor.IsObstacle || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
                     {
                         neighbors.Add(neighbor);
                     }
@@ -101,22 +101,22 @@ namespace Pathfinding
         }
 
 
-        private static List<GridPart> RetracePath(GridPart startGridPart, GridPart endGridPart)
+        private static List<IGridPart> RetracePath(IPathfinding startGridPart, IPathfinding endGridPart)
         {
-            List<GridPart> path = new List<GridPart>();
-            GridPart currentGridPart = endGridPart;
+            List<IGridPart> path = new List<IGridPart>();
+            IPathfinding currentGridPart = endGridPart;
 
             while (currentGridPart != startGridPart)
             {
-                path.Add(currentGridPart);
-                currentGridPart = currentGridPart.cameFrom;
+                path.Add(currentGridPart.gridPart);
+                currentGridPart = currentGridPart.CameFrom;
             }
 
             path.Reverse();
             return path;
         }
 
-        private static int GetDistance(GridPart gridPartA, GridPart gridPartB)
+        private static int GetDistance(IPathfinding gridPartA, IPathfinding gridPartB)
         {
             int distX = Math.Abs(gridPartA.Width - gridPartB.Width);
             int distY = Math.Abs(gridPartA.High - gridPartB.High);
@@ -124,7 +124,7 @@ namespace Pathfinding
             return distX + distY;
         }
 
-        private static GridPart FindClosestWalkableGridPart(GridPart targetGridPart, GridPart startGridPart, Transform moveObject)
+        private static IPathfinding FindClosestWalkableGridPart(IPathfinding targetGridPart, IPathfinding startGridPart, Transform moveObject)
         {
             int gridSizeX = GridManager.Instance.SizeX;
             int gridSizeY = GridManager.Instance.SizeY;
@@ -133,7 +133,7 @@ namespace Pathfinding
 
             for (int distance = 1; distance < maxDistance; distance++)
             {
-                var closestList = new List<GridPart>();
+                var closestList = new List<IPathfinding>();
                 for (int i = -distance; i <= distance; i++)
                 {
                     for (int j = -distance; j <= distance; j++)
@@ -143,8 +143,8 @@ namespace Pathfinding
 
                         if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
                         {
-                            GridPart gridPart = GridManager.Instance.GetGridPart(newX, newY);
-                            if (!(gridPart.IsObstacle || (gridPart.unit!=null  &&  gridPart.unit!=moveObject)))
+                            IPathfinding gridPart = GridManager.Instance.GetGridPart(newX, newY).Pathfinding;
+                            if (!(gridPart.IsObstacle || (gridPart.Unit!=null  &&  gridPart.Unit!=moveObject)))
                             {
                                 int currentDistance = Math.Abs(newX - targetGridPart.Width) + Math.Abs(newY - targetGridPart.High);
                                 if (currentDistance < closestDistance)

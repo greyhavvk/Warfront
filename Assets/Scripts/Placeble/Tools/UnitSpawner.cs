@@ -20,7 +20,7 @@ namespace Placeble.Tools
             }
 
             var unit = PlacebleFactory.Instance.InstantPopUnit();
-            unit.Transform.position = grid.transform.position;
+            unit.Transform.position = grid.Transform.position;
             unit.SetLevel(lvl);
             unit.Placed();
             foreach (var pieces in unit.BuildingPieces)
@@ -28,18 +28,18 @@ namespace Placeble.Tools
                 var position = pieces.position;
                 var gridPart = GridManager.Instance.GetGridPart(position);
                 gridPart.Empty = false;
-                gridPart.unit = unit.Transform;
+                gridPart.Unit = unit.Transform;
             }
         }
 
-        private static GridPart FindClosestWalkableGridPart(GridPart targetGridPart)
+        private static IGridPart FindClosestWalkableGridPart(IGridPart targetGridPart)
         {
             int gridSizeX = GridManager.Instance.SizeX;
             int gridSizeY = GridManager.Instance.SizeY;
             int maxDistance = Math.Max(gridSizeX, gridSizeY);
             int closestDistance = int.MaxValue;
 
-            GridPart closest = null;
+            IGridPart closest = null;
             for (int distance = 1; distance < maxDistance; distance++)
             {
                 for (int i = -distance; i <= distance; i++)
@@ -51,8 +51,8 @@ namespace Placeble.Tools
 
                         if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
                         {
-                            GridPart gridPart = GridManager.Instance.GetGridPart(newX, newY);
-                            if (!(gridPart.IsObstacle) && gridPart.unit == null)
+                            IGridPart gridPart = GridManager.Instance.GetGridPart(newX, newY);
+                            if (!(gridPart.IsObstacle) && gridPart.Unit == null)
                             {
                                 int currentDistance = Math.Abs(newX - targetGridPart.Width) +
                                                       Math.Abs(newY - targetGridPart.High);

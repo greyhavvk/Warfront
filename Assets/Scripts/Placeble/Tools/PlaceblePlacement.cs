@@ -1,12 +1,11 @@
-using System;
 using System.Linq;
+using Building;
 using DG.Tweening;
 using Grid_System;
 using InputSystem;
-using Placeble;
 using UnityEngine;
 
-namespace Building
+namespace Placeble.Tools
 {
     public class PlaceblePlacement : MonoBehaviour
     {
@@ -44,11 +43,11 @@ namespace Building
         {
             if (_unPlacedPlaceble==null)
                 return;
-            if (!GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())) return;
+            if (GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
             var canPlace = CheckCanPlace();
 
             _unPlacedPlaceble.SetCanPlaceColor(canPlace);
-            var position = GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos()).transform
+            var position = GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos()).Transform
                 .position;
             _unPlacedPlaceble.Transform.position = position;
         }
@@ -62,7 +61,7 @@ namespace Building
         {
             if (_unPlacedPlaceble==null)
                 return;
-            if (!GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())) return;
+            if (GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
             var canPlace = CheckCanPlace();
             if (canPlace)
             {
@@ -72,7 +71,7 @@ namespace Building
                     var position = pieces.position;
                     var gridPart = GridManager.Instance.GetGridPart(position);
                     gridPart.Empty = false;
-                    gridPart.unit = _unPlacedPlaceble.Transform;
+                    gridPart.Unit = _unPlacedPlaceble.Transform;
                 }
 
                 _unPlacedPlaceble = null;
@@ -91,7 +90,7 @@ namespace Building
         {
             if (_unPlacedPlaceble==null)
                 return;
-            if (!GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())) return;
+            if (GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
             _unPlacedPlaceble.Rotate();
         }
         

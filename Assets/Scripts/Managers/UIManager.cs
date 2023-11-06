@@ -1,6 +1,7 @@
 using Building;
 using InputSystem;
 using Placeble;
+using Placeble.Entity;
 using Placeble.Tools;
 using UI.Information;
 using UnityEngine;

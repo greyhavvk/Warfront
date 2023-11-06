@@ -1,34 +1,37 @@
-using System;
+using Pathfinding;
 using UnityEngine;
 
 namespace Grid_System
 {
-    public class GridPart : MonoBehaviour
+    public class GridPart : MonoBehaviour, IGridPart, IPathfinding
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
-
+        public int GCost { get=>_gCost; set=>_gCost=value; }
+        public int HCost  { get=>_hCost; set=>_hCost=value; }
+        public int FCost=>_gCost+ _hCost;
+        public bool IsObstacle => !_empty;
+        public Transform Unit  { get=>_unit; set=>_unit=value; }
+        public IPathfinding CameFrom  { get=>_cameFrom; set=>_cameFrom=value; }
+        public IGridPart gridPart => this;
+        public IPathfinding Pathfinding => this;
+        public int Width=>_width;
+        public int High=>_high;
+        
         private bool _empty = true;
         private int _width;
         private int _high;
 
-        public int gCost;
-        public int hCost;
-        public int FCost=>gCost+ hCost;
-        
-        public int Width=>_width;
-        public int High=>_high;
+        private int _gCost;
+        private int _hCost;
+        private IPathfinding _cameFrom;
+        private Transform _unit;
 
-        [HideInInspector] public GridPart cameFrom;
+        public Transform Transform => transform;
 
-        private Action _gridEmptiesChanged;
-
-        public Transform unit;
-
-        public void Initialize(int width, int high, Action gridEmptiesChanged)
+        public void Initialize(int width, int high)
         {
             _width = width;
             _high = high;
-            _gridEmptiesChanged = gridEmptiesChanged;
         }
         
         public bool Empty
@@ -36,20 +39,14 @@ namespace Grid_System
             get => _empty;
             set
             {
-                if (_empty!=value)
-                {
-                    _gridEmptiesChanged?.Invoke();
-                }
                 _empty = value;
                 if (_empty)
                 {
-                    unit = null;
+                    _unit = null;
                 }
                 UpdateVisual();
             }
         }
-
-        public bool IsObstacle => !_empty;
 
         private void UpdateVisual()
         {
