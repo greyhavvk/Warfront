@@ -72,7 +72,7 @@ namespace UI
         public void OnSpawnUnitButtonClicked(int lvl)
         {
             UnitSpawner.SpawnUnit(_spawnPoint, lvl);
-            CloseAllPanel();
+            //CloseAllPanel();
         }
 
         public void SetActiveProductionMenu(bool active)
@@ -87,7 +87,7 @@ namespace UI
             SetActiveProductionMenu(true);
         }
         
-        public void OpenInformationPanel(PlacebleType placebleType)
+        private void OpenInformationPanel(PlacebleType placebleType)
         {
             CloseAllPanel();
             informationMenu.SetActive(true);
