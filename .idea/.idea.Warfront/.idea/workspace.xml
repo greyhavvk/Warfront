@@ -3,22 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1921e082-33bd-49e0-ba6a-b0d3a60c959e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/UnitEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Entity/UnitEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlacebleFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeble/Tools/PlacebleFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/IUnitSelecting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/IUnitSelecting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/IUnitSelecting.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/IUnitSelecting.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitClick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitClick.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitClick.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitClick.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitDrag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitDrag.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitDrag.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitSelection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitSelection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Unit Selection/UnitSelection.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitSelection.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/Managed/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/Managed/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/Plugins/x86_64/lib_burst_generated.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/Plugins/x86_64/lib_burst_generated.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers.assets" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/level0" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/level0" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid System/Grid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pathfinding/IPathfinding.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/InfiniteScrolling/ScrollContentController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/ScrollRect.cs" root0="SKIP_HIGHLIGHTING" />
@@ -59,7 +45,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Build/Warfront.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Warfront.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Side Projects\Warfront\Build" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -120,6 +106,8 @@
       <workItem from="1699082344003" duration="2221000" />
       <workItem from="1699109553107" duration="15022000" />
       <workItem from="1699160982572" duration="45941000" />
+      <workItem from="1699249454256" duration="10995000" />
+      <workItem from="1699262228309" duration="341000" />
     </task>
     <servers />
   </component>

@@ -1,3 +1,4 @@
+using System;
 using Building;
 using InputSystem;
 using Managers;
@@ -36,7 +37,11 @@ namespace Placeble.Tools
             {
                 Instance = this;
             }
+        }
 
+        private void Start()
+        {
+            
             _barracksPool = new ObjectPool.ObjectPool(refBarracks, 10, new PlacebleInitializeData());
             _powerPlantsPool = new ObjectPool.ObjectPool(refPowerPlants, 10, new PlacebleInitializeData());
             _spikesPool = new ObjectPool.ObjectPool(refSpike, 10, new PlacebleInitializeData());
