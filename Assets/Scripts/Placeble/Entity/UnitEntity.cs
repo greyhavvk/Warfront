@@ -1,7 +1,7 @@
-﻿using System;
-using Building;
+﻿using Building;
 using Grid_System;
 using InputSystem;
+using Managers;
 using ObjectPool;
 using Placeble.PlacebleExtra;
 using UnitSelectionSystem;
@@ -20,12 +20,12 @@ namespace Placeble.Entity
         public override void Initialize(PoolableObjectInitializeData poolableObjectInitializeData)
         {
             base.Initialize(poolableObjectInitializeData);
-            ClickManager.Instance.OnUnitGetOrder += UnitGetOrder;
+            ClickManager.ClickEvent.OnUnitGetOrder += UnitGetOrder;
         }
 
         public void OnDestroy()
         {
-            ClickManager.Instance.OnUnitGetOrder -= UnitGetOrder;
+            ClickManager.ClickEvent.OnUnitGetOrder -= UnitGetOrder;
         }
 
         public override void SetLevel(int lvl)
@@ -52,7 +52,7 @@ namespace Placeble.Entity
         {
             base.Placed();
             UnitEnabled();
-            unitMovement.LastMoveGrid = GridManager.Instance.GetGridPart(transform.position);
+            unitMovement.LastMoveGrid = GridManager.GetPart.GetGridPart(transform.position);
         }
 
         protected override void ReturnToPool()

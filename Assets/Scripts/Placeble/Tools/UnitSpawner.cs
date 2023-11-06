@@ -1,5 +1,6 @@
 using System;
 using Grid_System;
+using Managers;
 using UnityEngine;
 
 namespace Placeble.Tools
@@ -8,7 +9,7 @@ namespace Placeble.Tools
     {
         public static void SpawnUnit(Vector3 spawnPoint , int lvl)
         {
-            var grid = GridManager.Instance.GetGridPart(spawnPoint);
+            var grid = GridManager.GetPart.GetGridPart(spawnPoint);
             if (grid.IsObstacle)
             {
                 grid = FindClosestWalkableGridPart(grid);
@@ -26,7 +27,7 @@ namespace Placeble.Tools
             foreach (var pieces in unit.BuildingPieces)
             {
                 var position = pieces.position;
-                var gridPart = GridManager.Instance.GetGridPart(position);
+                var gridPart = GridManager.GetPart.GetGridPart(position);
                 gridPart.Empty = false;
                 gridPart.Unit = unit.Transform;
             }
@@ -34,8 +35,8 @@ namespace Placeble.Tools
 
         private static IGridPart FindClosestWalkableGridPart(IGridPart targetGridPart)
         {
-            int gridSizeX = GridManager.Instance.SizeX;
-            int gridSizeY = GridManager.Instance.SizeY;
+            int gridSizeX = GridManager.GetGridSize.SizeX;
+            int gridSizeY = GridManager.GetGridSize.SizeY;
             int maxDistance = Math.Max(gridSizeX, gridSizeY);
             int closestDistance = int.MaxValue;
 
@@ -51,7 +52,7 @@ namespace Placeble.Tools
 
                         if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
                         {
-                            IGridPart gridPart = GridManager.Instance.GetGridPart(newX, newY);
+                            IGridPart gridPart = GridManager.GetPart.GetGridPart(newX, newY);
                             if (!(gridPart.IsObstacle) && gridPart.Unit == null)
                             {
                                 int currentDistance = Math.Abs(newX - targetGridPart.Width) +

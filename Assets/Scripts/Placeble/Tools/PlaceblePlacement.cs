@@ -1,8 +1,8 @@
 using System.Linq;
 using Building;
 using DG.Tweening;
-using Grid_System;
 using InputSystem;
+using Managers;
 using UnityEngine;
 
 namespace Placeble.Tools
@@ -29,9 +29,9 @@ namespace Placeble.Tools
 
         private void Start()
         {
-            ClickManager.Instance.OnTryPlacement += TryPlacement;
-            ClickManager.Instance.OnRotateBuilding += RotateBuilding;
-            ClickManager.Instance.OnCancel += CancelPlacement;
+            ClickManager.ClickEvent.OnTryPlacement += TryPlacement;
+            ClickManager.ClickEvent.OnRotateBuilding += RotateBuilding;
+            ClickManager.ClickEvent.OnCancel += CancelPlacement;
         }
 
         private void Update()
@@ -43,25 +43,25 @@ namespace Placeble.Tools
         {
             if (_unPlacedPlaceble==null)
                 return;
-            if (GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
+            if (GridManager.GetPart.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
             var canPlace = CheckCanPlace();
 
             _unPlacedPlaceble.SetCanPlaceColor(canPlace);
-            var position = GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos()).Transform
+            var position = GridManager.GetPart.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos()).Transform
                 .position;
             _unPlacedPlaceble.Transform.position = position;
         }
 
         private bool CheckCanPlace()
         {
-            return _unPlacedPlaceble.BuildingPieces.Select(pieces => pieces.position).Select(position => GridManager.Instance.GetGridPart(position)).All(gridPart => gridPart != null && gridPart.Empty);
+            return _unPlacedPlaceble.BuildingPieces.Select(pieces => pieces.position).Select(position => GridManager.GetPart.GetGridPart(position)).All(gridPart => gridPart != null && gridPart.Empty);
         }
 
         private void TryPlacement()
         {
             if (_unPlacedPlaceble==null)
                 return;
-            if (GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
+            if (GridManager.GetPart.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
             var canPlace = CheckCanPlace();
             if (canPlace)
             {
@@ -69,13 +69,13 @@ namespace Placeble.Tools
                 foreach (var pieces in _unPlacedPlaceble.BuildingPieces)
                 {
                     var position = pieces.position;
-                    var gridPart = GridManager.Instance.GetGridPart(position);
+                    var gridPart = GridManager.GetPart.GetGridPart(position);
                     gridPart.Empty = false;
                     gridPart.Unit = _unPlacedPlaceble.Transform;
                 }
 
                 _unPlacedPlaceble = null;
-                ClickManager.ClickType=ClickType.Nothing;
+                ClickManager.Type.ClickType=ClickType.Nothing;
             }
             else
             {
@@ -90,7 +90,7 @@ namespace Placeble.Tools
         {
             if (_unPlacedPlaceble==null)
                 return;
-            if (GridManager.Instance.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
+            if (GridManager.GetPart.GetGridPart(InputManager.Mouse.GetMousePosToWorldPos())==null) return;
             _unPlacedPlaceble.Rotate();
         }
         
@@ -100,7 +100,7 @@ namespace Placeble.Tools
                 return;
             _unPlacedPlaceble.CancelPlacement();
             _unPlacedPlaceble = null;
-            ClickManager.ClickType=ClickType.Nothing;
+            ClickManager.Type.ClickType=ClickType.Nothing;
         }
 
         public void SetUnplacedBuilding(IPlacement placebleEntity)

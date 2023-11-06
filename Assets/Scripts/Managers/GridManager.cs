@@ -1,17 +1,17 @@
-using System.Collections.Generic;
-using Pathfinding;
+using Grid_System;
 using UnityEngine;
 
-namespace Grid_System
+namespace Managers
 {
-    public class GridManager: MonoBehaviour
+    public class GridManager: MonoBehaviour,IGetGridPart,IGetGridSize
     {
         [SerializeField] private GridPart refGridPart;
         [SerializeField] private int width = 22;
         [SerializeField] private int height = 14;
         private Grid<GridPart> _grid;
 
-        public static GridManager Instance { get; private set; }
+        public static IGetGridPart GetPart { get; private set; }
+        public static IGetGridSize GetGridSize { get; private set; }
 
         public int SizeX => width;
 
@@ -19,13 +19,14 @@ namespace Grid_System
 
         private void Awake()
         {
-            if (Instance!=null && Instance!=this)
+            if (GetPart!=null && GetPart!=this)
             {
                 Destroy(gameObject);
             }
             else
             {
-                Instance = this;
+                GetGridSize = this;
+                GetPart = this;
             }
             
             CreateGrid();

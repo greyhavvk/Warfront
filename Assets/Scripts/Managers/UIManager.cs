@@ -1,17 +1,16 @@
 using Building;
 using InputSystem;
-using Placeble;
 using Placeble.Entity;
 using Placeble.Tools;
+using UI;
 using UI.Information;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace UI
+namespace Managers
 {
-    public class UIManager : MonoBehaviour
+    public class UIManager : MonoBehaviour, ISetActiveProduction
     {
-        public static UIManager Instance { get; private set; }
+        public static ISetActiveProduction SetActiveProduction { get; private set; }
         
         [SerializeField] private InformationScreenController informationScreenController;
         [SerializeField] private GameObject productionMenu;
@@ -22,13 +21,13 @@ namespace UI
         private Vector3 _spawnPoint;
         private void Awake()
         {
-            if (Instance!=null && Instance!=this)
+            if (SetActiveProduction!=null && SetActiveProduction!=this)
             {
                 Destroy(gameObject);
             }
             else
             {
-                Instance = this;
+                SetActiveProduction = this;
             }
             
             CloseAllPanel();
@@ -36,28 +35,28 @@ namespace UI
 
         private void Start()
         {
-            ClickManager.Instance.OnOpenProductionMenu += OpenProductionMenu;
-            ClickManager.Instance.OnCancel += CloseAllPanel;
-            ClickManager.Instance.OnPlacebleClick += PlacebleClick;
+            ClickManager.ClickEvent.OnOpenProductionMenu += OpenProductionMenu;
+            ClickManager.ClickEvent.OnCancel += CloseAllPanel;
+            ClickManager.ClickEvent.OnPlacebleClick += PlacebleClick;
         }
 
         private void OnDestroy()
         {
-            ClickManager.Instance.OnOpenProductionMenu -= OpenProductionMenu;
-            ClickManager.Instance.OnCancel -= CloseAllPanel;
-            ClickManager.Instance.OnPlacebleClick -= PlacebleClick;
+            ClickManager.ClickEvent.OnOpenProductionMenu -= OpenProductionMenu;
+            ClickManager.ClickEvent.OnCancel -= CloseAllPanel;
+            ClickManager.ClickEvent.OnPlacebleClick -= PlacebleClick;
         }
 
         private void PlacebleClick()
         {
-            if (ClickManager.ClickType != ClickType.Nothing)
+            if (ClickManager.Type.ClickType != ClickType.Nothing)
                 return;
             var hit = Physics2D.Raycast( InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, clickable);
             if (hit)
             {
                 if ( hit.collider.gameObject.CompareTag("building"))
                 {
-                    ClickManager.ClickType = ClickType.UIPanel;
+                    ClickManager.Type.ClickType = ClickType.UIPanel;
                     OpenInformationPanel(hit.collider.GetComponent<IPlacebleType>().PlacebleType);
                 }
 
@@ -100,7 +99,7 @@ namespace UI
             informationMenu.SetActive(false);
             SetActiveProductionMenu(false);
             outSideButton.SetActive(false);
-            ClickManager.ClickType = ClickType.Nothing;
+            ClickManager.Type.ClickType = ClickType.Nothing;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using InputSystem;
+using Managers;
 using UnityEngine;
 
 namespace UnitSelectionSystem
@@ -18,16 +19,16 @@ namespace UnitSelectionSystem
         {
             _camera=Camera.main;
             DrawVisual();
-            ClickManager.Instance.OnStartDrag+=StartDrag;
-            ClickManager.Instance.OnDrag+=Drag;
-            ClickManager.Instance.OnEndDrag+=EndDrag;
+            ClickManager.ClickEvent.OnStartDrag+=StartDrag;
+            ClickManager.ClickEvent.OnDrag+=Drag;
+            ClickManager.ClickEvent.OnEndDrag+=EndDrag;
         }
 
         private void OnDestroy()
         {
-            ClickManager.Instance.OnStartDrag-=StartDrag;
-            ClickManager.Instance.OnDrag-=Drag;
-            ClickManager.Instance.OnEndDrag-=EndDrag;
+            ClickManager.ClickEvent.OnStartDrag-=StartDrag;
+            ClickManager.ClickEvent.OnDrag-=Drag;
+            ClickManager.ClickEvent.OnEndDrag-=EndDrag;
         }
 
         private void EndDrag()
@@ -43,7 +44,7 @@ namespace UnitSelectionSystem
         {
             if (_dragging == false)
                 return;
-            if (ClickManager.ClickType != ClickType.Nothing)
+            if (ClickManager.Type.ClickType != ClickType.Nothing)
             {
                 _startPosition = Vector2.zero;
                 _endPosition = Vector2.zero;
@@ -57,7 +58,7 @@ namespace UnitSelectionSystem
 
         private void StartDrag()
         {
-            if (ClickManager.ClickType != ClickType.Nothing)
+            if (ClickManager.Type.ClickType != ClickType.Nothing)
                 return;
             _dragging = true;
             _startPosition = Input.mousePosition;

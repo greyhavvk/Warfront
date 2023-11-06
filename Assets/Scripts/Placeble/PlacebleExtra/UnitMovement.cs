@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Grid_System;
 using InputSystem;
+using Managers;
 using Pathfinding;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace Placeble.PlacebleExtra
         public void TriggerMove(RaycastHit2D hit)
         {
             StopCoroutine(Move());
-            var gridPart = GridManager.Instance.GetGridPart(hit.point);
+            var gridPart = GridManager.GetPart.GetGridPart(hit.point);
             if (gridPart == null)
                 return;
             var hitUnit = Physics2D.Raycast(InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, canTakeDamage);
@@ -47,8 +48,8 @@ namespace Placeble.PlacebleExtra
             {
                 yield break;
             }
-            var gridParts = AStar.FindPath(GridManager.Instance.GetGridPart(transform.position).Pathfinding,
-                GridManager.Instance.GetGridPart(_lastTarget.position).Pathfinding, transform);
+            var gridParts = AStar.FindPath(GridManager.GetPart.GetGridPart(transform.position).Pathfinding,
+                GridManager.GetPart.GetGridPart(_lastTarget.position).Pathfinding, transform);
             if (gridParts == null || gridParts.Count == 0)
                 yield break;
 

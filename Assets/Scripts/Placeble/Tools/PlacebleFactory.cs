@@ -1,5 +1,6 @@
 using Building;
 using InputSystem;
+using Managers;
 using ObjectPool;
 using Placeble.Entity;
 using UnitSelectionSystem;
@@ -78,7 +79,7 @@ namespace Placeble.Tools
                 PlaceblePlacement.Instance.SetUnplacedBuilding(placebleEntity);
             }
 
-            ClickManager.ClickType=ClickType.PlaceBuilding;
+            ClickManager.Type.ClickType=ClickType.PlaceBuilding;
             UnitSelection.Instance.DeselectAll();
         }
 

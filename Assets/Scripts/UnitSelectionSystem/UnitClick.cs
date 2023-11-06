@@ -1,4 +1,5 @@
 ﻿using InputSystem;
+using Managers;
 using UnityEngine;
 
 namespace UnitSelectionSystem
@@ -9,17 +10,17 @@ namespace UnitSelectionSystem
 
         private void Start()
         {
-            ClickManager.Instance.OnUnitClick+=Click;
+            ClickManager.ClickEvent.OnUnitClick+=Click;
         }
 
         private void OnDestroy()
         {
-            ClickManager.Instance.OnUnitClick-=Click;
+            ClickManager.ClickEvent.OnUnitClick-=Click;
         }
 
         private void Click()
         {
-            if (ClickManager.ClickType != ClickType.Nothing)
+            if (ClickManager.Type.ClickType != ClickType.Nothing)
                 return;
             var hit = Physics2D.Raycast( InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, clickable);
             if (hit)

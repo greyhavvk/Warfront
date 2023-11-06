@@ -1,5 +1,6 @@
 using Building;
 using Grid_System;
+using Managers;
 using ObjectPool;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace Placeble.Entity
         {
             foreach (var piece in BuildingPieces)
             {
-                GridManager.Instance.GetGridPart(piece.position).Empty = true;
+                GridManager.GetPart.GetGridPart(piece.position).Empty = true;
             }
             base.ReturnToPool();
         }

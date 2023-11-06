@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Grid_System;
+using Managers;
 using UnityEngine;
 
 namespace Pathfinding
@@ -76,8 +77,8 @@ namespace Pathfinding
         private static List<IPathfinding> GetNeighbors(IPathfinding gridPart, Transform moveObject)
         {
             List<IPathfinding> neighbors = new List<IPathfinding>();
-            int gridSizeX = GridManager.Instance.SizeX;
-            int gridSizeY = GridManager.Instance.SizeY;
+            int gridSizeX = GridManager.GetGridSize.SizeX;
+            int gridSizeY = GridManager.GetGridSize.SizeY;
 
             int[] offsetX = { 0, 0, 1, -1, 1, -1, 1, -1 };
             int[] offsetY = { 1, -1, 0, 0, 1, -1, -1, 1 };
@@ -89,7 +90,7 @@ namespace Pathfinding
 
                 if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
                 {
-                    IPathfinding neighbor = GridManager.Instance.GetGridPart(newX, newY).Pathfinding;
+                    IPathfinding neighbor = GridManager.GetPart.GetGridPart(newX, newY).Pathfinding;
                     if (!(neighbor.IsObstacle || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
                     {
                         neighbors.Add(neighbor);
@@ -126,8 +127,8 @@ namespace Pathfinding
 
         private static IPathfinding FindClosestWalkableGridPart(IPathfinding targetGridPart, IPathfinding startGridPart, Transform moveObject)
         {
-            int gridSizeX = GridManager.Instance.SizeX;
-            int gridSizeY = GridManager.Instance.SizeY;
+            int gridSizeX = GridManager.GetGridSize.SizeX;
+            int gridSizeY = GridManager.GetGridSize.SizeY;
             int maxDistance = Math.Max(gridSizeX, gridSizeY);
             int closestDistance = int.MaxValue;
 
@@ -143,7 +144,7 @@ namespace Pathfinding
 
                         if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
                         {
-                            IPathfinding gridPart = GridManager.Instance.GetGridPart(newX, newY).Pathfinding;
+                            IPathfinding gridPart = GridManager.GetPart.GetGridPart(newX, newY).Pathfinding;
                             if (!(gridPart.IsObstacle || (gridPart.Unit!=null  &&  gridPart.Unit!=moveObject)))
                             {
                                 int currentDistance = Math.Abs(newX - targetGridPart.Width) + Math.Abs(newY - targetGridPart.High);
