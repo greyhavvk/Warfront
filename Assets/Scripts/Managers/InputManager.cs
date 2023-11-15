@@ -22,14 +22,14 @@ namespace Managers
 
         public bool GetKey(KeyCode keyCode) => Input.GetKey(keyCode);
 
-        private void Awake()
+        public void SetInstance()
         {
             InputEvent = this;
             Mouse = this;
             Key = this;
         }
 
-        private void Start()
+        public void Initialize()
         {
             _camera=Camera.main;
         }

@@ -1,29 +1,33 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.InfiniteScrolling
 {
     public class InfiniteScroll : MonoBehaviour, IScrollHandler
     {
-        [FormerlySerializedAs("scrollContent")] [SerializeField]
-        private ScrollContentController scrollContentController;
+        [SerializeField] private ScrollContentController scrollContentController;
         
-        [SerializeField]
-        private float outOfBoundsThreshold;
+        [SerializeField] private float outOfBoundsThreshold;
         
         private ScrollRect _scrollRect;
 
         private bool _positiveDrag;
-        private void Start()
+        
+        public void Initialize()
+        {
+            SetVariables();
+            scrollContentController.Initialize();
+        }
+
+        private void SetVariables()
         {
             _scrollRect = GetComponent<ScrollRect>();
             _scrollRect.vertical = scrollContentController.Vertical;
             _scrollRect.horizontal = scrollContentController.Horizontal;
             _scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
         }
-        
+
         public void OnScroll(PointerEventData eventData)
         {
             _positiveDrag = eventData.scrollDelta.y < 0;

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace UnitSelectionSystem
@@ -13,10 +12,18 @@ namespace UnitSelectionSystem
 
         public List<Transform> UnitTransformList { get; private set; }
 
-        private void Awake()
+        public void SetInstance()
         {
             Instance = this;
+        }
 
+        public void Initialize()
+        {
+            SetVariables();
+        }
+
+        private void SetVariables()
+        {
             _unitDictionary = new Dictionary<GameObject, IUnitSelecting>();
             _selectedUnitList = new List<GameObject>();
             UnitTransformList = new List<Transform>();

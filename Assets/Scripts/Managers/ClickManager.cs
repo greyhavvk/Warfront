@@ -27,32 +27,43 @@ namespace Managers
 
         public ClickType ClickType { get; set; } = ClickType.Nothing;
 
-        private void Awake()
+        
+        public void SetInstance()
         {
             ClickEvent = this;
             Type = this;
         }
 
-        private void Start()
+        public void Initialize()
         {
-            InputManager.InputEvent.OnMouseLeftClickDown+=MouseLeftClickDown;
-            InputManager.InputEvent.OnMouseLeftClick+=MouseLeftClick;
-            InputManager.InputEvent.OnMouseLeftClickUp+=MouseLeftClickUp;
-            InputManager.InputEvent.OnMouseRightClickDown+=MouseRightClickDown;
-            InputManager.InputEvent.OnRotateButtonDown+=RotateButtonDown;
-            InputManager.InputEvent.OnCancelButtonDown+=CancelButtonDown;
+            ListenEvents();
         }
-    
+
+        private void ListenEvents()
+        {
+            InputManager.InputEvent.OnMouseLeftClickDown += MouseLeftClickDown;
+            InputManager.InputEvent.OnMouseLeftClick += MouseLeftClick;
+            InputManager.InputEvent.OnMouseLeftClickUp += MouseLeftClickUp;
+            InputManager.InputEvent.OnMouseRightClickDown += MouseRightClickDown;
+            InputManager.InputEvent.OnRotateButtonDown += RotateButtonDown;
+            InputManager.InputEvent.OnCancelButtonDown += CancelButtonDown;
+        }
+
         private void OnDestroy()
         {
-            InputManager.InputEvent.OnMouseLeftClickDown-=MouseLeftClickDown;
-            InputManager.InputEvent.OnMouseLeftClick-=MouseLeftClick;
-            InputManager.InputEvent.OnMouseLeftClickUp-=MouseLeftClickUp;
-            InputManager.InputEvent.OnMouseRightClickDown-=MouseRightClickDown;
-            InputManager.InputEvent.OnRotateButtonDown-=RotateButtonDown;
-            InputManager.InputEvent.OnCancelButtonDown-=CancelButtonDown;
+            MuteEvents();
         }
-        
+
+        private void MuteEvents()
+        {
+            InputManager.InputEvent.OnMouseLeftClickDown -= MouseLeftClickDown;
+            InputManager.InputEvent.OnMouseLeftClick -= MouseLeftClick;
+            InputManager.InputEvent.OnMouseLeftClickUp -= MouseLeftClickUp;
+            InputManager.InputEvent.OnMouseRightClickDown -= MouseRightClickDown;
+            InputManager.InputEvent.OnRotateButtonDown -= RotateButtonDown;
+            InputManager.InputEvent.OnCancelButtonDown -= CancelButtonDown;
+        }
+
 
         private void CancelButtonDown()
         {

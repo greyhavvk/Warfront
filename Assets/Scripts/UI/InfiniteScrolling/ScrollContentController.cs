@@ -35,7 +35,12 @@ namespace UI.InfiniteScrolling
         [SerializeField]
         private bool horizontal, vertical;
         
-        private void Start()
+        public void Initialize()
+        {
+            SetVariables();
+        }
+
+        private void SetVariables()
         {
             _rectTransform = GetComponent<RectTransform>();
             _rtChildren = new RectTransform[_rectTransform.childCount];
@@ -47,7 +52,7 @@ namespace UI.InfiniteScrolling
 
             var rect = _rectTransform.rect;
             _width = rect.width - (2 * horizontalMargin);
-            
+
             _height = rect.height - (2 * verticalMargin);
 
             _childWidth = _rtChildren[0].rect.width;
@@ -59,7 +64,7 @@ namespace UI.InfiniteScrolling
             else
                 InitializeContentHorizontal();
         }
-        
+
         private void InitializeContentHorizontal()
         {
             float originX = 0 - (_width * 0.5f);

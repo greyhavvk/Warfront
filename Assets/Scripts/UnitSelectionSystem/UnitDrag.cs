@@ -16,20 +16,30 @@ namespace UnitSelectionSystem
         private Vector2 _endPosition=Vector2.zero;
         private bool _dragging;
         
-        private void Start()
+        public void Initialize()
         {
             _camera=Camera.main;
             DrawVisual();
-            ClickManager.ClickEvent.OnStartDrag+=StartDrag;
-            ClickManager.ClickEvent.OnDrag+=Drag;
-            ClickManager.ClickEvent.OnEndDrag+=EndDrag;
+            ListenEvents();
+        }
+
+        private void ListenEvents()
+        {
+            ClickManager.ClickEvent.OnStartDrag += StartDrag;
+            ClickManager.ClickEvent.OnDrag += Drag;
+            ClickManager.ClickEvent.OnEndDrag += EndDrag;
         }
 
         private void OnDestroy()
         {
-            ClickManager.ClickEvent.OnStartDrag-=StartDrag;
-            ClickManager.ClickEvent.OnDrag-=Drag;
-            ClickManager.ClickEvent.OnEndDrag-=EndDrag;
+            MuteEvents();
+        }
+
+        private void MuteEvents()
+        {
+            ClickManager.ClickEvent.OnStartDrag -= StartDrag;
+            ClickManager.ClickEvent.OnDrag -= Drag;
+            ClickManager.ClickEvent.OnEndDrag -= EndDrag;
         }
 
         private Vector2 UpdatePosition(Vector2 position)

@@ -3,26 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="1921e082-33bd-49e0-ba6a-b0d3a60c959e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warfront/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid System/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid System/Grid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid System/GridPart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid System/GridPart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid System/IGridPart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid System/IGridPart.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/ClickManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/ClickManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GridManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/AStar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/AStar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/IPathfinding.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/IPathfinding.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeable/Entity/BarrackEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeable/Entity/BarrackEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeable/PlaceableExtra/HealthPointObserver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeable/PlaceableExtra/HealthPointObserver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeable/PlaceableExtra/UnitMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeable/PlaceableExtra/UnitMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/Managed/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/Managed/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/Plugins/x86_64/lib_burst_generated.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/Plugins/x86_64/lib_burst_generated.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers.assets" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/globalgamemanagers.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/level0" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/level0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/resources.assets" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/resources.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/resources.assets.resS" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/resources.assets.resS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/sharedassets0.assets" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/sharedassets0.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Build/Warfront_Data/sharedassets0.assets.resS" beforeDir="false" afterPath="$PROJECT_DIR$/Build/Warfront_Data/sharedassets0.assets.resS" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeable/Tools/PlaceableFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeable/Tools/PlaceableFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Placeable/Tools/PlaceablePlacement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Placeable/Tools/PlaceablePlacement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InfiniteScrolling/InfiniteScroll.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InfiniteScrolling/InfiniteScroll.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InfiniteScrolling/ScrollContentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InfiniteScrolling/ScrollContentController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitClick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitClick.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitDrag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitSelection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnitSelectionSystem/UnitSelection.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +24,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid System/Grid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Placeable/PlaceableEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/InfiniteScrolling/ScrollContentController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibraryDataProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/ScrollRect.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53aac14d88ba4477acc998b039cfd73a15ae00/b8/eff79927/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
@@ -133,7 +125,7 @@
       <workItem from="1699785509846" duration="18590000" />
       <workItem from="1699869397600" duration="18305000" />
       <workItem from="1699959045539" duration="16083000" />
-      <workItem from="1700026906706" duration="16964000" />
+      <workItem from="1700026906706" duration="19718000" />
     </task>
     <servers />
   </component>

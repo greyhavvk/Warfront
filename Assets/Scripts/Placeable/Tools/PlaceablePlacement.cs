@@ -15,17 +15,34 @@ namespace Placeable.Tools
         
         public static PlaceablePlacement Instance { get; private set; }
         
-        private void Awake()
+        public void SetInstance()
         {
             Instance = this;
         }
 
-        private void Start()
+        public void Initialize()
+        {
+            ListenEvents();
+            _camera = Camera.main;
+        }
+        
+        private void OnDestroy()
+        {
+            MuteEvents();
+        }
+
+        private void ListenEvents()
         {
             ClickManager.ClickEvent.OnTryPlacement += TryPlacement;
             ClickManager.ClickEvent.OnRotateBuilding += RotateBuilding;
             ClickManager.ClickEvent.OnCancel += CancelPlacement;
-            _camera = Camera.main;
+        }
+        
+        private void MuteEvents()
+        {
+            ClickManager.ClickEvent.OnTryPlacement -= TryPlacement;
+            ClickManager.ClickEvent.OnRotateBuilding -= RotateBuilding;
+            ClickManager.ClickEvent.OnCancel -= CancelPlacement;
         }
 
         private void Update()

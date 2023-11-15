@@ -25,14 +25,18 @@ namespace Placeable.Tools
         
         public static PlaceableFactory Instance { get; private set; }
         
-        private void Awake()
+        public void SetInstance()
         {
             Instance = this;
         }
 
-        private void Start()
+        public void Initialize()
         {
-            
+            SetObjectPools();
+        }
+
+        private void SetObjectPools()
+        {
             _barracksPool = new ObjectPool.ObjectPool(refBarracks, 10, new PlaceableInitializeData());
             _powerPlantsPool = new ObjectPool.ObjectPool(refPowerPlants, 10, new PlaceableInitializeData());
             _spikesPool = new ObjectPool.ObjectPool(refSpike, 10, new PlaceableInitializeData());

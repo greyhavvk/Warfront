@@ -1,10 +1,9 @@
-using System;
 using InputSystem;
 using Placeable;
 using Placeable.Entity;
 using Placeable.PlaceableExtra;
 using Placeable.Tools;
-using UI;
+using UI.InfiniteScrolling;
 using UI.Information;
 using UnityEngine;
 
@@ -14,17 +13,29 @@ namespace Managers
     {
         
         [SerializeField] private InformationScreenController informationScreenController;
+        [SerializeField] private InfiniteScroll infiniteScroll;
         [SerializeField] private LayerMask clickable;
 
         private Vector2[] _spawnPoints;
         private IHpInfo _listenedHpInfo;
 
-        private void Start()
+        public void Initialize()
+        {
+            ListenEvents();
+            infiniteScroll.Initialize();
+        }
+
+        private void ListenEvents()
         {
             ClickManager.ClickEvent.OnPlaceableClick += PlaceableClick;
         }
 
         private void OnDestroy()
+        {
+            MuteEvents();
+        }
+
+        private void MuteEvents()
         {
             ClickManager.ClickEvent.OnPlaceableClick -= PlaceableClick;
         }

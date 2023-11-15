@@ -8,14 +8,24 @@ namespace UnitSelectionSystem
     {
         [SerializeField] private LayerMask clickable;
 
-        private void Start()
+        public void Initialize()
         {
-            ClickManager.ClickEvent.OnUnitClick+=Click;
+            ListenEvents();
+        }
+
+        private void ListenEvents()
+        {
+            ClickManager.ClickEvent.OnUnitClick += Click;
         }
 
         private void OnDestroy()
         {
-            ClickManager.ClickEvent.OnUnitClick-=Click;
+            MuteEvents();
+        }
+
+        private void MuteEvents()
+        {
+            ClickManager.ClickEvent.OnUnitClick -= Click;
         }
 
         private void Click()

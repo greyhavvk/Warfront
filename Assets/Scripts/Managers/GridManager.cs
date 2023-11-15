@@ -21,14 +21,14 @@ namespace Managers
 
         public int SizeY => height;
 
-        private void Awake()
+        
+        public void SetInstance()
         {
             GetGridSize = this;
             GetPart = this;
-               
         }
-
-        private void Start()
+       
+        public void Initialize()
         {
             CreateGrid();
         }
@@ -50,7 +50,7 @@ namespace Managers
             return _grid.GetGridPart(x,y);
         }
 
-        public bool CheckHaveAvailableGrid()
+        private bool CheckHaveAvailableGrid()
         {
             return _grid.CheckHaveAvailableGrid();
         }
@@ -79,12 +79,9 @@ namespace Managers
             foreach (var possibleSpawnPoint in possibleSpawnPoints)
             {
                 var grid = GetGridPart(possibleSpawnPoint);
-                if (grid != null)
+                if (grid is { Empty: true })
                 {
-                    if (grid.Empty)
-                    {
-                        spawnPoints.Add(grid);
-                    }
+                    spawnPoints.Add(grid);
                 }
             }
 
