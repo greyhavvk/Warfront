@@ -21,6 +21,7 @@ namespace Managers
 
         public int SizeY => height;
 
+        private const float PanelWidthNormalizationFactor = 1920f;
         
         public void SetInstance()
         {
@@ -35,8 +36,8 @@ namespace Managers
 
         private void CreateGrid()
         {
-            var minX = leftPanel.rect.xMax/1920f;
-            var maxX = (1920f + rightPanel.rect.xMin) / 1920f;
+            var minX = leftPanel.rect.xMax/PanelWidthNormalizationFactor;
+            var maxX = (PanelWidthNormalizationFactor + rightPanel.rect.xMin) / PanelWidthNormalizationFactor;
             _grid = new Grid<GridPart>(width,height, refGridPart, minX, maxX);
         }
 
@@ -55,51 +56,51 @@ namespace Managers
             return _grid.CheckHaveAvailableGrid();
         }
         
-         public List<IGridPart> FindEmptyPoints(List<Vector2> possibleSpawnPoints)
+        public List<IGridPart> FindEmptyPoints(List<Vector2> possibleSpawnPoints)
         {
             var spawnPoints = ClearObstacleFromPossibleSpawnPoints(possibleSpawnPoints);
+
             if (spawnPoints.Count <= 0)
             {
                 spawnPoints = SearchOuterPoints(possibleSpawnPoints);
-                possibleSpawnPoints = new List<Vector2>();
-                if (spawnPoints!=null)
-                {
-                    foreach (var spawnPoint in spawnPoints)
-                    {
-                        possibleSpawnPoints.Add(spawnPoint.Transform.position);
-                    }
-                }
             }
+
+            UpdatePossibleSpawnPoints(possibleSpawnPoints, spawnPoints);
+
             return spawnPoints;
         }
-
-         private List<IGridPart> ClearObstacleFromPossibleSpawnPoints(List<Vector2> possibleSpawnPoints)
+        
+        private void UpdatePossibleSpawnPoints(List<Vector2> possibleSpawnPoints, List<IGridPart> spawnPoints)
         {
-            List<IGridPart> spawnPoints = new List<IGridPart>();
-            foreach (var possibleSpawnPoint in possibleSpawnPoints)
+            if (spawnPoints != null)
             {
-                var grid = GetGridPart(possibleSpawnPoint);
-                if (grid is { Empty: true })
+                foreach (var spawnPoint in spawnPoints)
                 {
-                    spawnPoints.Add(grid);
+                    possibleSpawnPoints.Add(spawnPoint.Transform.position);
                 }
             }
-
-            return spawnPoints;
         }
 
-        public List<IGridPart> SearchOuterPoints(List<Vector2> possibleSpawnPoints)
+        private List<IGridPart> ClearObstacleFromPossibleSpawnPoints(List<Vector2> possibleSpawnPoints)
+        {
+            return possibleSpawnPoints
+                .Select(possibleSpawnPoint => GetGridPart(possibleSpawnPoint))
+                .Where(grid => grid is { Empty: true })
+                .ToList();
+        }
+
+        private List<IGridPart> SearchOuterPoints(List<Vector2> possibleSpawnPoints)
         {
             if (!CheckHaveAvailableGrid())
             {
                 return null;
             }
-            
+
             var newPossibleSpawnPoints = new List<Vector2>();
             var searchedPoints = new List<Vector2>();
             var gridSizeX = SizeX;
             var gridSizeY = SizeY;
-            
+
             foreach (var targetGridPart in possibleSpawnPoints.Select(possibleSpawnPoint => GetGridPart(possibleSpawnPoint)).Where(targetGridPart => targetGridPart != null))
             {
                 for (int i = -1; i <= 1; i++)
@@ -109,20 +110,26 @@ namespace Managers
                         int newX = targetGridPart.Width + i;
                         int newY = targetGridPart.High + j;
 
-                        if (newX < 0 || newX >= gridSizeX || newY < 0 || newY >= gridSizeY) continue;
-                        var gridPart = GetGridPart(newX, newY);
-                        if (gridPart == null) continue;
-                        if (possibleSpawnPoints.Contains(gridPart.Transform.position)) continue;
-                        if (gridPart.Empty)
+                        if (IsWithinGridBounds(newX, newY, gridSizeX, gridSizeY))
                         {
-                            newPossibleSpawnPoints.Add(gridPart.Transform.position);
+                            var gridPart = GetGridPart(newX, newY);
+                            if (gridPart != null && !possibleSpawnPoints.Contains(gridPart.Transform.position) && gridPart.Empty)
+                            {
+                                newPossibleSpawnPoints.Add(gridPart.Transform.position);
+                            }
+
+                            if (gridPart != null) searchedPoints.Add(gridPart.Transform.position);
                         }
-                        searchedPoints.Add(gridPart.Transform.position);
                     }
                 }
             }
 
             return newPossibleSpawnPoints.Count > 0 ? FindEmptyPoints(newPossibleSpawnPoints) : SearchOuterPoints(searchedPoints);
+        }
+        
+        private bool IsWithinGridBounds(int x, int y, int gridSizeX, int gridSizeY)
+        {
+            return x >= 0 && x < gridSizeX && y >= 0 && y < gridSizeY;
         }
     }
 }

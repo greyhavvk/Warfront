@@ -25,6 +25,9 @@ namespace Grid_System
 
         public Transform Transform => transform;
 
+        private readonly float _disableAlphaValue=.3f;
+        private readonly float _activeAlphaValue=1;
+
         public void Initialize(int width, int high)
         {
             _width = width;
@@ -48,7 +51,7 @@ namespace Grid_System
         private void UpdateVisual()
         {
             var color = spriteRenderer.color;
-            color.a = _empty ? .3f : 1;
+            color.a = _empty ? _disableAlphaValue : _activeAlphaValue;
             spriteRenderer.color = color;
         }
     }
