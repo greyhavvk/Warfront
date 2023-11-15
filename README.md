@@ -4,6 +4,4 @@ Tuşlar:
 
 "Q" tuşu ile barrack'ları döndürebiliyoruz.
 
-ui menüsünde değilseniz "Esc" tuşu uygulamadan çıkarıyor. ui menüsü veya grid'e bir şey yerleştirme anındaysanız, işlemleri iptal ediyor.
-
-"P" tuşu sol taraftaki prudiction menüsünü açmakta. scroll whell ile menüde gezebilirsiniz.
+Eğer bir şey yerleştirmiyorsanız "Esc" tuşu uygulamadan çıkarıyor. Ama yerleştirme anındaysanız yerleştirme iptal oluyor
