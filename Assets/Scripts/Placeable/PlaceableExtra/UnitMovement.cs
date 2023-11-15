@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Grid_System;
 using Managers;
@@ -71,7 +70,7 @@ namespace Placeable.PlaceableExtra
             }
 
             Move();
-            CheckMoveIsComplate();
+            CheckMoveIsComplete();
         }
 
         public void MoveRequest(IGridPart gridPart)
@@ -81,6 +80,10 @@ namespace Placeable.PlaceableExtra
             {
                 if (gridPart.Unit.CompareTag("unit"))
                 {
+                    if (Vector2.Distance(gridPart.Unit.position, transform.position)<=Mathf.Sqrt(2f))
+                    {
+                        return;
+                    }
                     _requestedPossiblePoints.Add(gridPart.Unit);
                 }
                 else
@@ -152,7 +155,7 @@ namespace Placeable.PlaceableExtra
             _requestedPossiblePoints = null;
         }
 
-        private void CheckMoveIsComplate()
+        private void CheckMoveIsComplete()
         {
             if (_time / moveTimePerGrid>=1)
             {
