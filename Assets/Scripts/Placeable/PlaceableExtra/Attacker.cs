@@ -1,5 +1,4 @@
 using System.Collections;
-using InputSystem;
 using Managers;
 using UnityEngine;
 
@@ -34,8 +33,14 @@ namespace Placeable.PlaceableExtra
         {
             var hit = Physics2D.Raycast(InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, canTakeDamage);
             if (hit)
+            {
                 if (hit.transform!=transform.parent)
                     _target = hit.transform.GetComponent<ITakeDamage>();
+            }
+            else 
+            {
+                StopAttack();
+            }
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -51,9 +56,7 @@ namespace Placeable.PlaceableExtra
         {
             if (_target == null) return;
             if (_target.GameObject != other.gameObject) return;
-            _isAttacking = false;
-            _target = null;
-            StopCoroutine(Attack());
+            StopAttack();
         }
 
         private IEnumerator Attack()
@@ -74,6 +77,7 @@ namespace Placeable.PlaceableExtra
 
         public void StopAttack()
         {
+            _isAttacking = false;
             _target = null;
             StopCoroutine(Attack());
         }
