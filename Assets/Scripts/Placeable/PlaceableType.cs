@@ -1,10 +1,9 @@
-namespace Building
+namespace Placeable
 {
-    public enum PlacebleType
+    public enum PlaceableType
     {
         Barracks,
         PowerPlants,
-        Unit,
         Tree,
         Spike,
         Wall,

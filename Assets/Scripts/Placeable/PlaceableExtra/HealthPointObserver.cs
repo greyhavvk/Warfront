@@ -1,36 +1,37 @@
 using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace HitPointSystem
+namespace Placeable.PlaceableExtra
 {
-    public class HealthPointObserver : MonoBehaviour,ITakeDamage
+    public class HealthPointObserver : MonoBehaviour,ITakeDamage,IHpInfo
     {
-        [SerializeField] private float _maxHp;
-        [SerializeField] private Image progress;
+        [SerializeField] private float maxHp;
         [SerializeField] private GameObject hpPanel;
+        [SerializeField] private TMP_Text healthText;
         private float _currentHitPoint;
-        private Action _dieAction;
+        public float MaxHp => maxHp;
+        public float CurrentHp => _currentHitPoint;
+        public Action OnDie { get; set; }
 
         public void Initialize(Action dieAction)
         {
-            _currentHitPoint = _maxHp;
+            _currentHitPoint = maxHp;
             UpdateProgress();
-            _dieAction = dieAction;
+            OnDie = dieAction;
             hpPanel.SetActive(false);
         }
 
         public void ResetHp()
         {
-            _currentHitPoint = _maxHp;
+            _currentHitPoint = maxHp;
             UpdateProgress();
-            hpPanel.SetActive(true);
+           hpPanel.SetActive(true);
         }
         
         private void UpdateProgress()
         {
-            var normalizedValue = _currentHitPoint/_maxHp;
-            progress.fillAmount = normalizedValue;
+            healthText.text=_currentHitPoint + "/" + maxHp;
         }
 
         public void TakeDamage(float damage)
@@ -47,13 +48,13 @@ namespace HitPointSystem
 
         private void Die()
         {
-            _dieAction?.Invoke();
+            OnDie?.Invoke();
             hpPanel.SetActive(false);
         }
 
         public void SetHp(float dataHp)
         {
-            _maxHp=dataHp;
+            maxHp=dataHp;
         }
     }
 }

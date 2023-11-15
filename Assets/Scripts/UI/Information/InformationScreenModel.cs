@@ -1,14 +1,13 @@
 using System;
-using Building;
+using Placeable;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace UI.Information
 {
     [Serializable]
     public class InformationScreenSprite
     {
-       public PlacebleType informationScreen;
+       public PlaceableType informationScreen;
         public Sprite sprite;
     }
     [Serializable]
@@ -16,7 +15,7 @@ namespace UI.Information
     {
         public InformationScreenSprite[] informationScreenSprites;
 
-        public Sprite GetSprite(PlacebleType informationScreen)
+        public Sprite GetSprite(PlaceableType informationScreen)
         {
             var sprite = informationScreenSprites[0].sprite;
 

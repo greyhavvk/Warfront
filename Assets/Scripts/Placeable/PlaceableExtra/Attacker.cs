@@ -1,9 +1,9 @@
 using System.Collections;
-using HitPointSystem;
 using InputSystem;
+using Managers;
 using UnityEngine;
 
-namespace Placeble.PlacebleExtra
+namespace Placeable.PlaceableExtra
 {
     public class Attacker : MonoBehaviour
     {
@@ -52,6 +52,7 @@ namespace Placeble.PlacebleExtra
             if (_target == null) return;
             if (_target.GameObject != other.gameObject) return;
             _isAttacking = false;
+            _target = null;
             StopCoroutine(Attack());
         }
 
@@ -60,14 +61,21 @@ namespace Placeble.PlacebleExtra
             while (CheckTargetIsActive())
             {
                 yield return new WaitForSeconds(timeBetweenAttacking);
-                _target.TakeDamage(_damage);
+                if (_target!=null)
+                {
+                    _target.TakeDamage(_damage);
+                }
+                else
+                {
+                    yield break;
+                }
             }
         }
 
         public void StopAttack()
         {
-            StopCoroutine(Attack());
             _target = null;
+            StopCoroutine(Attack());
         }
 
         public void SetDamage(float dataDamage)

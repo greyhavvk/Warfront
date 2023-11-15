@@ -16,18 +16,16 @@ namespace Managers
         public event EventHandler OnRotateBuilding ;
     
         public event EventHandler OnCancel;
-    
-        public event EventHandler OnOpenProductionMenu ;
-    
+        
         public event EventHandler OnUnitClick;
     
-        public event EventHandler OnPlacebleClick;
+        public event EventHandler OnPlaceableClick;
     
         public event EventHandler OnStartDrag ;
         public event EventHandler OnDrag ;
         public event EventHandler OnEndDrag;
-    
-        public ClickType ClickType { get; set; }
+
+        public ClickType ClickType { get; set; } = ClickType.Nothing;
 
         private void Awake()
         {
@@ -43,7 +41,6 @@ namespace Managers
             InputManager.InputEvent.OnMouseRightClickDown+=MouseRightClickDown;
             InputManager.InputEvent.OnRotateButtonDown+=RotateButtonDown;
             InputManager.InputEvent.OnCancelButtonDown+=CancelButtonDown;
-            InputManager.InputEvent.OnProductionButtonDown+=ProductionButtonDown;
         }
     
         private void OnDestroy()
@@ -54,16 +51,8 @@ namespace Managers
             InputManager.InputEvent.OnMouseRightClickDown-=MouseRightClickDown;
             InputManager.InputEvent.OnRotateButtonDown-=RotateButtonDown;
             InputManager.InputEvent.OnCancelButtonDown-=CancelButtonDown;
-            InputManager.InputEvent.OnProductionButtonDown-=ProductionButtonDown;
         }
-
-        private void ProductionButtonDown()
-        {
-            if (ClickType == ClickType.PlaceBuilding)
-                return;
-            OnOpenProductionMenu?.Invoke();
-            ClickType = ClickType.UIPanel;
-        }
+        
 
         private void CancelButtonDown()
         {
@@ -76,7 +65,6 @@ namespace Managers
             {
                 Application.Quit();
             }
-       
         }
 
         private void RotateButtonDown()
@@ -116,7 +104,7 @@ namespace Managers
             {
                 OnStartDrag?.Invoke();
                 OnUnitClick?.Invoke();
-                OnPlacebleClick?.Invoke();
+                OnPlaceableClick?.Invoke();
             }
         }
     }

@@ -1,4 +1,5 @@
 using Pathfinding;
+using Placeable;
 using UnityEngine;
 
 namespace Grid_System
@@ -11,7 +12,9 @@ namespace Grid_System
         public int FCost=>_gCost+ _hCost;
         public bool IsObstacle => !_empty;
         public Transform Unit  { get=>_unit; set=>_unit=value; }
-        public IPathfinding CameFrom  { get=>_cameFrom; set=>_cameFrom=value; }
+        public IGetPiecePosition PiecePosition { get; set; }
+        public IPathfinding CameFrom { get; set; }
+
         public IGridPart gridPart => this;
         public IPathfinding Pathfinding => this;
         public int Width=>_width;
@@ -23,7 +26,6 @@ namespace Grid_System
 
         private int _gCost;
         private int _hCost;
-        private IPathfinding _cameFrom;
         private Transform _unit;
 
         public Transform Transform => transform;

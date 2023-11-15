@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Grid_System
@@ -6,5 +7,6 @@ namespace Grid_System
     {
         IGridPart GetGridPart(Vector3 worldPosition);
         IGridPart GetGridPart(int x, int y);
+        List<IGridPart> FindEmptyPoints(List<Vector2> possibleSpawnPoints);
     }
 }

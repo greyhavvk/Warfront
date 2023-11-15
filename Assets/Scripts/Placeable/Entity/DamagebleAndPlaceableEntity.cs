@@ -1,16 +1,14 @@
-using Grid_System;
-using HitPointSystem;
+using System.Collections.Generic;
 using ObjectPool;
-using Placeble;
-using Placeble.Entity;
+using Placeable.PlaceableExtra;
 using UnityEngine;
 
-namespace Building
+namespace Placeable.Entity
 {
-    public class DamagebleAndPlaceableEntity : PlacebleEntity
+    public class DamagebleAndPlaceableEntity : PlaceableEntity
     {
         [SerializeField] protected HealthPointObserver healthPointObserver;
-        
+      
         public override void Initialize(PoolableObjectInitializeData poolableObjectInitializeData)
         {
             base.Initialize(poolableObjectInitializeData);

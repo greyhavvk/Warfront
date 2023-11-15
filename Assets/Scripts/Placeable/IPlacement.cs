@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-namespace Building
+namespace Placeable
 {
     public interface IPlacement
     {
@@ -11,6 +10,7 @@ namespace Building
         void Rotate();
         Transform[] BuildingPieces { get;}
         Transform Transform { get; }
-        void SetLevel(int lvl);
+        
+        IGetPiecePosition GetPiecePosition { get; }
     }
 }

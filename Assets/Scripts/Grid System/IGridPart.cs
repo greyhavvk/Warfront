@@ -1,4 +1,5 @@
 using Pathfinding;
+using Placeable;
 using UnityEngine;
 
 namespace Grid_System
@@ -11,6 +12,7 @@ namespace Grid_System
         IPathfinding Pathfinding { get; }
         
         Transform Unit { get; set; }
+        IGetPiecePosition PiecePosition { get; set; }
         int High { get; }
         int Width { get; }
         bool IsObstacle { get; }

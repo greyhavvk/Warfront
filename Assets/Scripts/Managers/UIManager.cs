@@ -1,97 +1,80 @@
-using Building;
+using System;
 using InputSystem;
-using Placeble.Entity;
-using Placeble.Tools;
+using Placeable;
+using Placeable.Entity;
+using Placeable.PlaceableExtra;
+using Placeable.Tools;
 using UI;
 using UI.Information;
 using UnityEngine;
 
 namespace Managers
 {
-    public class UIManager : MonoBehaviour, ISetActiveProduction
+    public class UIManager : MonoBehaviour
     {
-        public static ISetActiveProduction SetActiveProduction { get; private set; }
         
         [SerializeField] private InformationScreenController informationScreenController;
-        [SerializeField] private GameObject productionMenu;
-        [SerializeField] private GameObject informationMenu;
-        [SerializeField] private GameObject outSideButton;
         [SerializeField] private LayerMask clickable;
 
-        private Vector3 _spawnPoint;
-        private void Awake()
-        {
-            SetActiveProduction = this;
-        }
+        private Vector2[] _spawnPoints;
+        private IHpInfo _listenedHpInfo;
 
         private void Start()
         {
-            CloseAllPanel();
-            ClickManager.ClickEvent.OnOpenProductionMenu += OpenProductionMenu;
-            ClickManager.ClickEvent.OnCancel += CloseAllPanel;
-            ClickManager.ClickEvent.OnPlacebleClick += PlacebleClick;
+            ClickManager.ClickEvent.OnPlaceableClick += PlaceableClick;
         }
 
         private void OnDestroy()
         {
-            ClickManager.ClickEvent.OnOpenProductionMenu -= OpenProductionMenu;
-            ClickManager.ClickEvent.OnCancel -= CloseAllPanel;
-            ClickManager.ClickEvent.OnPlacebleClick -= PlacebleClick;
+            ClickManager.ClickEvent.OnPlaceableClick -= PlaceableClick;
         }
 
-        private void PlacebleClick()
+        private void PlaceableClick()
         {
             if (ClickManager.Type.ClickType != ClickType.Nothing)
                 return;
             var hit = Physics2D.Raycast( InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, clickable);
-            if (hit)
+            if (!hit) return;
+            if (!hit.collider.gameObject.CompareTag("building")) return;
+            SetInformationPanel(hit.collider.GetComponent<IPlaceableType>().PlaceableType, hit.collider.GetComponent<IHpInfo>());
+                    
+            var barracks = hit.collider.GetComponent<BarrackEntity>();
+            if (barracks)
             {
-                if ( hit.collider.gameObject.CompareTag("building"))
-                {
-                    ClickManager.Type.ClickType = ClickType.UIPanel;
-                    OpenInformationPanel(hit.collider.GetComponent<IPlacebleType>().PlacebleType);
-                }
-
-                var barracks = hit.collider.GetComponent<BarrackEntity>();
-                if (barracks)
-                {
-                    _spawnPoint = barracks.SpawnPoint.position;
-                }
+                _spawnPoints = barracks.SpawnPoints;
             }
         }
 
+        private void SetListenedHpInfo(IHpInfo hpInfo)
+        {
+            if (_listenedHpInfo != null)
+            {
+                _listenedHpInfo.OnDie -= ListenedHpInfoDied;
+                _listenedHpInfo = null;
+            }
+                
+            if (hpInfo!=null)
+            {
+                _listenedHpInfo = hpInfo;
+                _listenedHpInfo.OnDie += ListenedHpInfoDied;
+            }
+        }
+
+        private void ListenedHpInfoDied()
+        {
+            informationScreenController.DisablePanel();
+        }
+
+        private void SetInformationPanel(PlaceableType placeableType, IHpInfo hpInfo)
+        {
+            informationScreenController.SetMenu(placeableType);
+            SetListenedHpInfo(hpInfo);
+        }
+
+
         public void OnSpawnUnitButtonClicked(int lvl)
         {
-            UnitSpawner.SpawnUnit(_spawnPoint, lvl);
-            //CloseAllPanel();
-        }
-
-        public void SetActiveProductionMenu(bool active)
-        {
-            productionMenu.SetActive(active);
-            outSideButton.SetActive(active);
-        }
-
-        private void OpenProductionMenu()
-        {
-            CloseAllPanel();
-            SetActiveProductionMenu(true);
-        }
-        
-        private void OpenInformationPanel(PlacebleType placebleType)
-        {
-            CloseAllPanel();
-            informationMenu.SetActive(true);
-            outSideButton.SetActive(true);
-            informationScreenController.SetMenu(placebleType);
-        }
-
-        public void CloseAllPanel()
-        {
-            informationMenu.SetActive(false);
-            SetActiveProductionMenu(false);
-            outSideButton.SetActive(false);
-            ClickManager.Type.ClickType = ClickType.Nothing;
+            UnitSpawner.SpawnUnit(_spawnPoints, lvl);
         }
     }
 }

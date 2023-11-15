@@ -7,13 +7,13 @@ namespace ObjectPool
     public class ObjectPool
     {
         public int PoolCount => _objectPool.Count;
-        public PoolableObjectInitializeData InitializeData { get; }
+        private PoolableObjectInitializeData InitializeData { get; }
 
         private readonly Transform _poolParent;
         private readonly PoolableObject _prefab;
         private readonly int _refillCount;
         private readonly Stack<PoolableObject> _objectPool = new Stack<PoolableObject>();
-        private int _index=0;
+        private int _index;
 
         public ObjectPool(PoolableObject prefab, int count, PoolableObjectInitializeData poolableObjectInitializeData,
             int refillCount = 10, Transform parent = null)

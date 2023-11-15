@@ -9,10 +9,11 @@ namespace UnitSelectionSystem
     {
         private Camera _camera;
         [SerializeField] private RectTransform boxVisual;
+        [SerializeField] private RectTransform leftPanel;
+        [SerializeField] private RectTransform rightPanel;
         private Rect _selectionBox;
         private Vector2 _startPosition=Vector2.zero;
         private Vector2 _endPosition=Vector2.zero;
-
         private bool _dragging;
         
         private void Start()
@@ -31,11 +32,18 @@ namespace UnitSelectionSystem
             ClickManager.ClickEvent.OnEndDrag-=EndDrag;
         }
 
+        private Vector2 UpdatePosition(Vector2 position)
+        {
+            var ratio = (Screen.width / 1920f);
+            position.x = Mathf.Clamp(position.x, leftPanel.rect.xMax*ratio, rightPanel.rect.xMin*ratio+Screen.width);
+            return position;
+        }
+
         private void EndDrag()
         {
             SelectUnits();
-            _startPosition = Vector2.zero;
-            _endPosition = Vector2.zero;
+            _startPosition = UpdatePosition(Vector2.zero);
+            _endPosition = UpdatePosition(Vector2.zero);
             DrawVisual();
             _dragging = false;
         }
@@ -46,22 +54,20 @@ namespace UnitSelectionSystem
                 return;
             if (ClickManager.Type.ClickType != ClickType.Nothing)
             {
-                _startPosition = Vector2.zero;
-                _endPosition = Vector2.zero;
+                _startPosition = UpdatePosition(Vector2.zero);
+                _endPosition = UpdatePosition(Vector2.zero);
                 DrawVisual();
                 return;
             }
-            _endPosition = Input.mousePosition;
+            _endPosition = UpdatePosition(Input.mousePosition);
             DrawVisual();
             DrawSelection();
         }
 
         private void StartDrag()
         {
-            if (ClickManager.Type.ClickType != ClickType.Nothing)
-                return;
             _dragging = true;
-            _startPosition = Input.mousePosition;
+            _startPosition = UpdatePosition(Input.mousePosition);
             _selectionBox = new Rect();
         }
         

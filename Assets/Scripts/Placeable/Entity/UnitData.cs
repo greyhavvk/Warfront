@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Placeble.Entity
+namespace Placeable.Entity
 {
     [Serializable]
     public class UnitData

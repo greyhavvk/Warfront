@@ -1,6 +1,7 @@
+using InputSystem;
 using UnityEngine;
 
-namespace InputSystem
+namespace Managers
 {
     public class InputManager : MonoBehaviour, IMouse,IInputEvent,IKey
     {
@@ -59,11 +60,6 @@ namespace InputSystem
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 OnRotateButtonDown?.Invoke();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                OnProductionButtonDown?.Invoke();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))

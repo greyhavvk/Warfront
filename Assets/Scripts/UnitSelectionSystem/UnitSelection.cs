@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace UnitSelectionSystem
@@ -74,7 +75,10 @@ namespace UnitSelectionSystem
         public void Deselect(GameObject unitToDeselect)
         {
             _selectedUnitList.Remove(unitToDeselect);
-            _unitDictionary[unitToDeselect].UnitUnselected();
+            if (_unitDictionary.ContainsKey(unitToDeselect))
+            {
+                _unitDictionary[unitToDeselect].UnitUnselected();
+            }
         }
     }
 }

@@ -1,12 +1,14 @@
 using System;
-using Building;
+using Placeable;
+using UnityEngine;
 
-namespace UI
+namespace UI.ProductionButton
 {
     [Serializable]
     public class ProductionMenuModel
     {
-        public PlacebleType placebleType;
-        public int lvl;
+        [SerializeField] private PlaceableType placeableType;
+
+        public PlaceableType PlaceableType => placeableType;
     }
 }

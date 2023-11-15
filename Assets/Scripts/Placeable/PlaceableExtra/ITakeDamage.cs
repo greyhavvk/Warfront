@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HitPointSystem
+namespace Placeable.PlaceableExtra
 {
     public interface ITakeDamage
     {

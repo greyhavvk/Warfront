@@ -4,6 +4,5 @@ namespace InputSystem
     {
         Nothing,
         PlaceBuilding,
-        UIPanel,
     }
 }

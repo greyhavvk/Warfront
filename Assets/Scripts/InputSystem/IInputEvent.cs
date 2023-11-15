@@ -1,3 +1,5 @@
+using Managers;
+
 namespace InputSystem
 {
     public interface IInputEvent
@@ -8,6 +10,5 @@ namespace InputSystem
         public event InputManager.EventHandler OnMouseRightClickDown ;
         public event InputManager.EventHandler OnRotateButtonDown;
         public event  InputManager.EventHandler OnCancelButtonDown;
-        public event  InputManager.EventHandler OnProductionButtonDown;
     }
 }

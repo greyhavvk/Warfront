@@ -156,9 +156,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1822326112802294191}
+  - component: {fileID: 5967273516304463116}
   - component: {fileID: 7440401904789024871}
   - component: {fileID: 134706507961841580}
-  - component: {fileID: 5967273516304463116}
   m_Layer: 3
   m_Name: Spike
   m_TagString: building
@@ -183,6 +183,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5967273516304463116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717029682719491081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64101eb201bc4fdd9134250701e8e0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeableType: 3
+  buildingPieces:
+  - {fileID: 4436786174245869966}
+  spriteRenderer: {fileID: 8959758659193791200}
+  canPlaceColor: {r: 0, g: 0.8509804, b: 1, a: 1}
+  cantPlaceColor: {r: 1, g: 0, b: 0, a: 1}
+  pieces:
+  - {fileID: 4436786174245869966}
 --- !u!50 &7440401904789024871
 Rigidbody2D:
   serializedVersion: 4
@@ -230,21 +250,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5967273516304463116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3717029682719491081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6dfb25789964a1a98efc656550e76e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placebleType: 4
-  buildingPieces:
-  - {fileID: 4436786174245869966}
-  spriteRenderer: {fileID: 8959758659193791200}
-  canPlaceColor: {r: 0, g: 0.8509804, b: 1, a: 1}
-  cantPlaceColor: {r: 1, g: 0, b: 0, a: 1}

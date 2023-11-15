@@ -8,18 +8,19 @@ namespace Pathfinding
 {
     public static class AStar
     {
-        public static List<IGridPart> FindPath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject)
+        public static List<IGridPart> FindPath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject, out float cost)
         {
-            if (targetGridPart.IsObstacle || (targetGridPart.Unit!=null  &&  targetGridPart.Unit!=moveObject))
+            cost = 0;
+            if (startGridPart==null || targetGridPart==null)
             {
-                var newTarget = FindClosestWalkableGridPart(targetGridPart, startGridPart, moveObject);
-                targetGridPart = newTarget;
+                return null;
             }
-            
-            return CalculatePath(startGridPart, targetGridPart, moveObject, out var gridParts) ? gridParts : null;
+
+            return CalculatePath(startGridPart, targetGridPart, moveObject, out var gridParts, out cost) ? gridParts : null;
         }
 
-        private static bool CalculatePath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject, out List<IGridPart> gridParts)
+        private static bool CalculatePath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject,
+            out List<IGridPart> gridParts, out float cost)
         {
             List<IPathfinding> openSet = new List<IPathfinding>();
             HashSet<IPathfinding> closedSet = new HashSet<IPathfinding>();
@@ -44,6 +45,7 @@ namespace Pathfinding
                 {
                     {
                         gridParts = RetracePath(startGridPart, targetGridPart);
+                        cost = targetGridPart.FCost;
                         return true;
                     }
                 }
@@ -71,6 +73,7 @@ namespace Pathfinding
             }
 
             gridParts = null;
+            cost =0;
             return false;
         }
 
@@ -90,11 +93,16 @@ namespace Pathfinding
 
                 if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
                 {
-                    IPathfinding neighbor = GridManager.GetPart.GetGridPart(newX, newY).Pathfinding;
-                    if (!(neighbor.IsObstacle || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
+                    var grid = GridManager.GetPart.GetGridPart(newX, newY);
+                    if (grid != null)
                     {
-                        neighbors.Add(neighbor);
+                        IPathfinding neighbor = grid.Pathfinding;
+                        if (!(neighbor.IsObstacle || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
+                        {
+                            neighbors.Add(neighbor);
+                        }
                     }
+                   
                 }
             }
 
@@ -123,61 +131,6 @@ namespace Pathfinding
             int distY = Math.Abs(gridPartA.High - gridPartB.High);
 
             return distX + distY;
-        }
-
-        private static IPathfinding FindClosestWalkableGridPart(IPathfinding targetGridPart, IPathfinding startGridPart, Transform moveObject)
-        {
-            int gridSizeX = GridManager.GetGridSize.SizeX;
-            int gridSizeY = GridManager.GetGridSize.SizeY;
-            int maxDistance = Math.Max(gridSizeX, gridSizeY);
-            int closestDistance = int.MaxValue;
-
-            for (int distance = 1; distance < maxDistance; distance++)
-            {
-                var closestList = new List<IPathfinding>();
-                for (int i = -distance; i <= distance; i++)
-                {
-                    for (int j = -distance; j <= distance; j++)
-                    {
-                        int newX = targetGridPart.Width + i;
-                        int newY = targetGridPart.High + j;
-
-                        if (newX >= 0 && newX < gridSizeX && newY >= 0 && newY < gridSizeY)
-                        {
-                            IPathfinding gridPart = GridManager.GetPart.GetGridPart(newX, newY).Pathfinding;
-                            if (!(gridPart.IsObstacle || (gridPart.Unit!=null  &&  gridPart.Unit!=moveObject)))
-                            {
-                                int currentDistance = Math.Abs(newX - targetGridPart.Width) + Math.Abs(newY - targetGridPart.High);
-                                if (currentDistance < closestDistance)
-                                {
-                                    closestDistance = currentDistance;
-                                    closestList.Add(gridPart);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (closestList.Count>0)
-                {
-                    var closest = closestList[0];
-                    for (int i = 1; i < closestList.Count; i++)
-                    {
-                        if (closestList[i].FCost < closest.FCost)
-                        {
-                            closest = closestList[i];
-                        }
-                    }
-
-                    if (CalculatePath(startGridPart, closest,moveObject, out _))
-                    {
-                        return closest;
-                    }
-                }
-          
-            }
-
-            return null;
         }
 
     }

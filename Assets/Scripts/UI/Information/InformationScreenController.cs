@@ -1,4 +1,5 @@
-using Building;
+using Placeable;
+using Placeable.PlaceableExtra;
 using UnityEngine;
 
 namespace UI.Information
@@ -8,10 +9,15 @@ namespace UI.Information
         [SerializeField] private InformationScreenView informationScreenView;
         [SerializeField] private InformationScreenModel informationScreenModel;
 
-        public void SetMenu(PlacebleType placebleType)
+        public void SetMenu(PlaceableType placeableType)
         {
-            informationScreenView.SetSprite(informationScreenModel.GetSprite(placebleType));
-            informationScreenView.SetActiveButtons(placebleType==PlacebleType.Barracks);
+            informationScreenView.EnablePanel(placeableType==PlaceableType.Barracks);
+            informationScreenView.SetSprite(informationScreenModel.GetSprite(placeableType));
+        }
+
+        public void DisablePanel()
+        {
+            informationScreenView.DisablePanel();
         }
     }
 }

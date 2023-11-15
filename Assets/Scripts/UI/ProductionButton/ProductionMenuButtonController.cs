@@ -1,5 +1,5 @@
 using Managers;
-using Placeble.Tools;
+using Placeable.Tools;
 using UnityEngine;
 
 namespace UI.ProductionButton
@@ -11,8 +11,8 @@ namespace UI.ProductionButton
         
         public void OnButtonClick()
         {
-            PlacebleFactory.Instance.PopBuilding(productionMenuModel.placebleType, productionMenuModel.lvl);
-            UIManager.SetActiveProduction.SetActiveProductionMenu(false);
+            PlaceablePlacement.Instance.CancelPlacement();
+            PlaceableFactory.Instance.PopBuilding(productionMenuModel.PlaceableType);
         }
     }
 }

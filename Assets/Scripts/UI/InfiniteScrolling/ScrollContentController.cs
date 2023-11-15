@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UI
+namespace UI.InfiniteScrolling
 {
     public class ScrollContentController : MonoBehaviour
     {

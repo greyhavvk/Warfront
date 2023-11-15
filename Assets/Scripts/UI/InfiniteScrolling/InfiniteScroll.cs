@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.InfiniteScrolling
 {
     public class InfiniteScroll : MonoBehaviour, IScrollHandler
     {
