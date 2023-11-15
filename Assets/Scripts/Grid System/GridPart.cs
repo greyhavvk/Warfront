@@ -1,22 +1,17 @@
-using Pathfinding;
 using Placeable;
 using UnityEngine;
 
 namespace Grid_System
 {
-    public class GridPart : MonoBehaviour, IGridPart, IPathfinding
+    public class GridPart : MonoBehaviour, IGridPart
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
         public int GCost { get=>_gCost; set=>_gCost=value; }
         public int HCost  { get=>_hCost; set=>_hCost=value; }
         public int FCost=>_gCost+ _hCost;
-        public bool IsObstacle => !_empty;
         public Transform Unit  { get=>_unit; set=>_unit=value; }
         public IGetPiecePosition PiecePosition { get; set; }
-        public IPathfinding CameFrom { get; set; }
-
-        public IGridPart gridPart => this;
-        public IPathfinding Pathfinding => this;
+        public IGridPart CameFrom { get; set; }
         public int Width=>_width;
         public int High=>_high;
         

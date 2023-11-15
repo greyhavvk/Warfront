@@ -189,7 +189,7 @@ namespace Placeable.PlaceableExtra
 
         private List<IGridPart> FindPath()
         {
-            var path = AStar.FindPath(LastMoveGrid.Pathfinding, _destinationGrid.Pathfinding, transform, out _);
+            var path = AStar.FindPath(LastMoveGrid, _destinationGrid, transform, out _);
             return path;
         }
 
@@ -244,9 +244,9 @@ namespace Placeable.PlaceableExtra
             var nearest = outerPoints[0];
             foreach (var outerPoint in outerPoints)
             {
-                var pathOne = AStar.FindPath(LastMoveGrid.Pathfinding, nearest.Pathfinding, transform,
+                var pathOne = AStar.FindPath(LastMoveGrid, nearest, transform,
                     out float costOne);
-                var pathTwo = AStar.FindPath(LastMoveGrid.Pathfinding, outerPoint.Pathfinding, transform,
+                var pathTwo = AStar.FindPath(LastMoveGrid, outerPoint, transform,
                     out float costTwo);
 
                 if (pathTwo!=null)
@@ -262,7 +262,7 @@ namespace Placeable.PlaceableExtra
                 }
             }
 
-            return AStar.FindPath(LastMoveGrid.Pathfinding, nearest.Pathfinding, transform,
+            return AStar.FindPath(LastMoveGrid, nearest, transform,
                 out _)==null ? null : nearest;
         }
 

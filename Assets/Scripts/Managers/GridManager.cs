@@ -81,7 +81,7 @@ namespace Managers
                 var grid = GetGridPart(possibleSpawnPoint);
                 if (grid != null)
                 {
-                    if (!grid.IsObstacle)
+                    if (grid.Empty)
                     {
                         spawnPoints.Add(grid);
                     }
@@ -116,7 +116,7 @@ namespace Managers
                         var gridPart = GetGridPart(newX, newY);
                         if (gridPart == null) continue;
                         if (possibleSpawnPoints.Contains(gridPart.Transform.position)) continue;
-                        if (!gridPart.IsObstacle)
+                        if (gridPart.Empty)
                         {
                             newPossibleSpawnPoints.Add(gridPart.Transform.position);
                         }

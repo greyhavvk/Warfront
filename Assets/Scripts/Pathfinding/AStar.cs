@@ -8,7 +8,7 @@ namespace Pathfinding
 {
     public static class AStar
     {
-        public static List<IGridPart> FindPath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject, out float cost)
+        public static List<IGridPart> FindPath(IGridPart startGridPart, IGridPart targetGridPart, Transform moveObject, out float cost)
         {
             cost = 0;
             if (startGridPart==null || targetGridPart==null)
@@ -19,16 +19,16 @@ namespace Pathfinding
             return CalculatePath(startGridPart, targetGridPart, moveObject, out var gridParts, out cost) ? gridParts : null;
         }
 
-        private static bool CalculatePath(IPathfinding startGridPart, IPathfinding targetGridPart, Transform moveObject,
+        private static bool CalculatePath(IGridPart startGridPart, IGridPart targetGridPart, Transform moveObject,
             out List<IGridPart> gridParts, out float cost)
         {
-            List<IPathfinding> openSet = new List<IPathfinding>();
-            HashSet<IPathfinding> closedSet = new HashSet<IPathfinding>();
+            List<IGridPart> openSet = new List<IGridPart>();
+            HashSet<IGridPart> closedSet = new HashSet<IGridPart>();
             openSet.Add(startGridPart);
 
             while (openSet.Count > 0)
             {
-                IPathfinding currentGridPart = openSet[0];
+                IGridPart currentGridPart = openSet[0];
                 for (int i = 1; i < openSet.Count; i++)
                 {
                     if (openSet[i].FCost < currentGridPart.FCost || (openSet[i].FCost == currentGridPart.FCost &&
@@ -41,7 +41,7 @@ namespace Pathfinding
                 openSet.Remove(currentGridPart);
                 closedSet.Add(currentGridPart);
 
-                if (currentGridPart == targetGridPart && !(currentGridPart.IsObstacle || (currentGridPart.Unit!=null  &&  currentGridPart.Unit!=moveObject)))
+                if (currentGridPart == targetGridPart && !(!currentGridPart.Empty || (currentGridPart.Unit!=null  &&  currentGridPart.Unit!=moveObject)))
                 {
                     {
                         gridParts = RetracePath(startGridPart, targetGridPart);
@@ -52,7 +52,7 @@ namespace Pathfinding
 
                 foreach (var neighbor in GetNeighbors(currentGridPart, moveObject))
                 {
-                    if (closedSet.Contains(neighbor) || (neighbor.IsObstacle || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
+                    if (closedSet.Contains(neighbor) || (!neighbor.Empty || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
                     {
                         continue;
                     }
@@ -77,9 +77,9 @@ namespace Pathfinding
             return false;
         }
 
-        private static List<IPathfinding> GetNeighbors(IPathfinding gridPart, Transform moveObject)
+        private static List<IGridPart> GetNeighbors(IGridPart gridPart, Transform moveObject)
         {
-            List<IPathfinding> neighbors = new List<IPathfinding>();
+            List<IGridPart> neighbors = new List<IGridPart>();
             int gridSizeX = GridManager.GetGridSize.SizeX;
             int gridSizeY = GridManager.GetGridSize.SizeY;
 
@@ -96,8 +96,8 @@ namespace Pathfinding
                     var grid = GridManager.GetPart.GetGridPart(newX, newY);
                     if (grid != null)
                     {
-                        IPathfinding neighbor = grid.Pathfinding;
-                        if (!(neighbor.IsObstacle || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
+                        IGridPart neighbor = grid;
+                        if (!(!neighbor.Empty || (neighbor.Unit!=null  &&  neighbor.Unit!=moveObject)))
                         {
                             neighbors.Add(neighbor);
                         }
@@ -110,14 +110,14 @@ namespace Pathfinding
         }
 
 
-        private static List<IGridPart> RetracePath(IPathfinding startGridPart, IPathfinding endGridPart)
+        private static List<IGridPart> RetracePath(IGridPart startGridPart, IGridPart endGridPart)
         {
             List<IGridPart> path = new List<IGridPart>();
-            IPathfinding currentGridPart = endGridPart;
+            IGridPart currentGridPart = endGridPart;
 
             while (currentGridPart != startGridPart)
             {
-                path.Add(currentGridPart.gridPart);
+                path.Add(currentGridPart);
                 currentGridPart = currentGridPart.CameFrom;
             }
 
@@ -125,7 +125,7 @@ namespace Pathfinding
             return path;
         }
 
-        private static int GetDistance(IPathfinding gridPartA, IPathfinding gridPartB)
+        private static int GetDistance(IGridPart gridPartA, IGridPart gridPartB)
         {
             int distX = Math.Abs(gridPartA.Width - gridPartB.Width);
             int distY = Math.Abs(gridPartA.High - gridPartB.High);

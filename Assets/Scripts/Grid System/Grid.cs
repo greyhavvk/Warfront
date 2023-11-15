@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -7,8 +7,6 @@ namespace Grid_System
 {
     public class Grid<TGridObject>  where TGridObject : Object, IGridPart
     {
-        private readonly int _width;
-        private readonly int _height;
         private const float GridSize = 1;
         private readonly Dictionary<Vector3,TGridObject> _gridLocalPositionDictionary;
         private readonly Transform _parent;
@@ -17,8 +15,6 @@ namespace Grid_System
         {
             int index = 0;
             _gridLocalPositionDictionary = new Dictionary<Vector3,TGridObject>();
-            _height = height;
-            _width = width;
             _parent = new GameObject("Grid Part Parent").transform; 
             _parent.position=new Vector2((-(width / 2f)+.5f)*GridSize, (-(height / 2f)+.5f)*GridSize);
             var mainCamera = Camera.main;
@@ -26,25 +22,22 @@ namespace Grid_System
             {
                 for (int j = 0; j < height; j++)
                 {
-                    if (mainCamera != null)
-                    {
-                        var localPosition = new Vector3(i * GridSize, j * GridSize);
-                        var objectScreenPosition = mainCamera.WorldToViewportPoint(localPosition+_parent.position);
-                        if ( ((objectScreenPosition.x>minX && objectScreenPosition.x<(maxX) && objectScreenPosition.y is > 0 and < 1)))
-                        {
-                            var createdGridObject = Object.Instantiate(refGridPart, _parent);
-                            createdGridObject.name += index;
-                            index++;
-                            _gridLocalPositionDictionary.Add(localPosition,createdGridObject);
-                        }
-                    }
+                    if (mainCamera == null) continue;
+                    var localPosition = new Vector3(i * GridSize, j * GridSize);
+                    var objectScreenPosition = mainCamera.WorldToViewportPoint(localPosition+_parent.position);
+                    if (((!(objectScreenPosition.x > minX) || !(objectScreenPosition.x < (maxX)) ||
+                          objectScreenPosition.y is <= 0 or >= 1))) continue;
+                    var createdGridObject = Object.Instantiate(refGridPart, _parent);
+                    createdGridObject.name += index;
+                    index++;
+                    _gridLocalPositionDictionary.Add(localPosition,createdGridObject);
                 }
             }
 
             RepositionGridParts(minX, maxX);
         }
 
-        public void GetXY(Vector3 localPosition, out int x, out int y)
+        private void GetXY(Vector3 localPosition, out int x, out int y)
         {
             x = Mathf.FloorToInt(localPosition.x / GridSize+GridSize*.5f);
             y = Mathf.FloorToInt(localPosition.y / GridSize+GridSize*.5f);
@@ -72,24 +65,12 @@ namespace Grid_System
 
         public IGridPart GetGridPart(int x, int y)
         {
-            if (_gridLocalPositionDictionary.ContainsKey(new Vector2(x, y)))
-            {
-                return _gridLocalPositionDictionary[new Vector2(x, y)];
-            }
-            return null;
+            return _gridLocalPositionDictionary.ContainsKey(new Vector2(x, y)) ? _gridLocalPositionDictionary[new Vector2(x, y)] : null;
         }
 
         public bool CheckHaveAvailableGrid()
         {
-            foreach (var gridPart in _gridLocalPositionDictionary.Values)
-            {
-                if (gridPart.Empty)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return _gridLocalPositionDictionary.Values.Any(gridPart => gridPart.Empty);
         }
     }
 }

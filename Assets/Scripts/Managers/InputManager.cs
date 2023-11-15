@@ -19,7 +19,6 @@ namespace Managers
         public event EventHandler OnMouseRightClickDown ;
         public event EventHandler OnRotateButtonDown;
         public event  EventHandler OnCancelButtonDown;
-        public event  EventHandler OnProductionButtonDown;
 
         public bool GetKey(KeyCode keyCode) => Input.GetKey(keyCode);
 

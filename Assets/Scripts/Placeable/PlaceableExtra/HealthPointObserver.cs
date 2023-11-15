@@ -10,8 +10,6 @@ namespace Placeable.PlaceableExtra
         [SerializeField] private GameObject hpPanel;
         [SerializeField] private TMP_Text healthText;
         private float _currentHitPoint;
-        public float MaxHp => maxHp;
-        public float CurrentHp => _currentHitPoint;
         public Action OnDie { get; set; }
 
         public void Initialize(Action dieAction)
@@ -55,6 +53,11 @@ namespace Placeable.PlaceableExtra
         public void SetHp(float dataHp)
         {
             maxHp=dataHp;
+        }
+
+        public void UpdateRotation()
+        {
+            healthText.transform.eulerAngles=Vector3.zero;
         }
     }
 }

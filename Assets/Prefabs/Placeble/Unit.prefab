@@ -234,9 +234,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTimePerGrid: 1
-  canTakeDamage:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &8913635482955352415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,8 +441,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.673}
-  m_SizeDelta: {x: 0.5, y: 0.6}
+  m_AnchoredPosition: {x: 0, y: -0.3}
+  m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7557084212711222583
 MeshRenderer:
