@@ -165,7 +165,7 @@ namespace Placeable.PlaceableExtra
                 _movingGrid = null;
                 if (_followingTarget)
                 {
-                    if (Vector2.Distance(_possiblePoints[0].position, transform.position)<=Mathf.Sqrt(2f))
+                    if (Vector2.Distance(_possiblePoints[0].position, transform.position)<=Mathf.Sqrt(2f) || !_possiblePoints[0].gameObject.activeSelf)
                     {
                         ResetMove();
                     }

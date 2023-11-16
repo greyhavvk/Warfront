@@ -11,7 +11,7 @@ namespace Pathfinding
         public static List<IGridPart> FindPath(IGridPart startGridPart, IGridPart targetGridPart, Transform moveObject, out float cost)
         {
             cost = 0;
-            if (startGridPart==null || targetGridPart==null)
+            if (startGridPart==null || targetGridPart==null  || !moveObject)
             {
                 return null;
             }

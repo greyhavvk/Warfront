@@ -1,3 +1,4 @@
+using System;
 using InputSystem;
 using Placeable;
 using Placeable.Entity;
@@ -18,6 +19,7 @@ namespace Managers
 
         private Vector2[] _spawnPoints;
         private IHpInfo _listenedHpInfo;
+        private const String BuildingTag = "building";
 
         public void Initialize()
         {
@@ -44,13 +46,21 @@ namespace Managers
         {
             if (ClickManager.Type.ClickType != ClickType.Nothing)
                 return;
-            var hit = Physics2D.Raycast( InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, clickable);
-            if (!hit) return;
-            if (!hit.collider.gameObject.CompareTag("building")) return;
-            SetInformationPanel(hit.collider.GetComponent<IPlaceableType>().PlaceableType, hit.collider.GetComponent<IHpInfo>());
-                    
-            var barracks = hit.collider.GetComponent<BarrackEntity>();
-            if (barracks)
+
+            var hit = Physics2D.Raycast(InputManager.Mouse.GetMousePosToWorldPos(), Vector2.zero, Mathf.Infinity, clickable);
+            if (!hit)
+                return;
+
+            if (!hit.collider.CompareTag(BuildingTag))
+                return;
+
+            var placeableType = hit.collider.GetComponent<IPlaceableType>().PlaceableType;
+            var hpInfo = hit.collider.GetComponent<IHpInfo>();
+
+            SetInformationPanel(placeableType, hpInfo);
+
+
+            if (hit.collider.TryGetComponent(out BarrackEntity barracks))
             {
                 _spawnPoints = barracks.SpawnPoints;
             }

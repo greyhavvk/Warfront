@@ -46,6 +46,10 @@ namespace UnitSelectionSystem
                         UnitSelection.Instance.ClickSelect(hit.collider.gameObject);
                     } 
                 }
+                else
+                {
+                    UnitSelection.Instance.DeselectAll();
+                }
             }
             else
             {
